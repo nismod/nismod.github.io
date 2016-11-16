@@ -30,3 +30,14 @@ exclude:
   - LICENSE.txt
   - Gemfile
   - Gemfile.lock
+
+collections:
+  presentations:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: presentations
+    values:
+      layout: presentation
