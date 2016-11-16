@@ -3,9 +3,190 @@ title: Spatial Data Tools
 layout: presentation
 ---
 
+# Spatial Data Tools
 
-# Test
+## Desktop GIS
+QGIS for viewing spatial data
+
+## Spatial data formats
+ogr2ogr for converting between formats
+
+## Spatial databases
+Postgres and PostGIS for storing and querying against a database
+
+## Spatial data libraries
+GDAL for handling spatial objects in code
+
+## Estimating memory usage and profiling code
+valgrind or language-specific profilers
 
 ---
 
-Slide 2
+# Install
+
+## OSGeo4W
+This a bundle installer for Windows that includes QGIS, GDAL and other tools.
+
+[https://trac.osgeo.org/osgeo4w/](https://trac.osgeo.org/osgeo4w/)
+
+## QGIS
+[http://www.qgis.org/](http://www.qgis.org/)
+
+## Postgres
+[https://www.postgresql.org/](https://www.postgresql.org/)
+
+## PostGIS
+[http://postgis.net/](http://postgis.net/)
+
+---
+
+# Desktop GIS
+
+## QGIS
+
+Docs: [http://www.qgis.org/en/docs/index.html](http://www.qgis.org/en/docs/index.html)
+
+Tutorial: [http://docs.qgis.org/2.14/en/docs/training_manual/index.html](http://docs.qgis.org/2.14/en/docs/training_manual/index.html)
+
+## ArcGIS
+
+If you have access to ArcGIS, then [ArcMap](http://desktop.arcgis.com/en/arcmap/)
+or [ArcGIS Pro](http://pro.arcgis.com/en/pro-app/) have similar feature sets.
+
+---
+
+# QGIS: view data
+
+- new project
+- folder structure (importance of relative references)
+- import shapefile
+- zoom to layer
+- view attribute table
+- identify node
+- layer properties
+    - style
+    - labels
+
+
+---
+
+# ogr2ogr
+
+Docs: http://www.gdal.org/ogr2ogr.html
+
+- convert between formats (shp/osm/geojson/csv/sql...)
+- transform between coordinate systems (WGS84/OSGB36/Web mercator...)
+- clip regions
+- simplify geometries
+- filter fields
+
+Other GDAL utilities: http://gdal.org/gdal_utilities.html
+
+---
+
+# PostGIS
+
+Docs: [http://postgis.net/docs/manual-2.3/](http://postgis.net/docs/manual-2.3/)
+
+Tutorial: [http://workshops.boundlessgeo.com/postgis-intro/index.html](http://workshops.boundlessgeo.com/postgis-intro/index.html)
+
+PostGIS is an extension to Postgres. It needs to be enabled once per database.
+
+```bash
+createdb spatial_data_workshop # create new database
+psql -d spatial_data_workshop  # log in to database using command line client
+CREATE EXTENSION postgis;      # create postgis extension
+```
+
+--
+
+Store spatial data alongside standard data types
+
+```sql
+CREATE TABLE workshop_nodes (
+    node_id serial PRIMARY KEY         -- Primary key and id field
+    , node_name text                   -- Name of node asset
+    , condition integer                -- Rating of node condition (good, average, poor)
+    , last_updated timestamp with time zone DEFAULT now()
+    , properties jsonb                 -- Key-value map of additional node-specific attributes
+    , location geography(POINT, 4326)  -- Node geometry (GIS location, shape)
+);
+```
+
+---
+
+# More PostGIS
+
+Create geographical index
+
+```sql
+CREATE INDEX workshop_nodes_gist ON workshop_nodes USING GIST ( location );
+```
+
+--
+
+Add custom data type to provide a category-type field
+
+```sql
+CREATE TYPE data_status AS ENUM ('staged', 'approved', 'archived');
+
+ALTER TABLE workshop_nodes ADD COLUMN status data_status DEFAULT 'staged'
+```
+
+
+---
+
+# GDAL
+
+Comes installed with OSGeo4W or QGIS.
+
+- Windows binaries are maintained at: [http://www.gisinternals.com/](http://www.gisinternals.com/) (or [build](https://trac.osgeo.org/gdal/wiki/BuildingOnWindows))
+- Mac binaries are available at: [http://www.kyngchaos.com/software/frameworks#gdal_complete](http://www.kyngchaos.com/software/frameworks#gdal_complete) or `brew install gdal`
+- Ubuntu has a default package: `sudo apt-get install gdal-bin` (or [build])
+
+C++/C library with [bindings](https://trac.osgeo.org/gdal/wiki#GDALOGRInOtherLanguages)
+for other languages.
+
+- Python [https://pypi.python.org/pypi/pygdal/1.10.1.0](https://pypi.python.org/pypi/pygdal/1.10.1.0)
+- Java [https://trac.osgeo.org/gdal/wiki/GdalOgrInJava](https://trac.osgeo.org/gdal/wiki/GdalOgrInJava)
+- C# [https://trac.osgeo.org/gdal/wiki/GdalOgrInCsharp](https://trac.osgeo.org/gdal/wiki/GdalOgrInCsharp)
+- R [https://cran.r-project.org/web/packages/rgdal/index.html](https://cran.r-project.org/web/packages/rgdal/index.html)
+
+---
+
+# GDAL capabilities
+
+Cookbook: https://pcjericks.github.io/py-gdalogr-cookbook/index.html
+
+Do any common spatial operation programmatically
+- create points, lines, polygons
+- calculate length, area, buffer
+- calculate intersection, union
+- filter geometries by attribute
+- read or write to spatial data formats
+
+---
+
+# Valgrind
+
+Docs: [http://valgrind.org/docs/manual/manual.html](http://valgrind.org/docs/manual/manual.html)
+
+A suite of tools that run on Linux and UNIX platforms (including Mac OS X).
+
+Massif: [http://valgrind.org/info/tools.html#massif](http://valgrind.org/info/tools.html#massif)
+
+Massif is a heap profiler, it analyses and tracks a program's heap usage and memory allocations.
+
+Graph total program memory usage.
+
+<small>Note: the 'heap' is one kind of memory area provided by an operating system for
+a program to store values; the other kind is the 'stack'. High level languages
+(like Python or Java) don't generally expose these details to the programmer.</small>
+
+---
+
+# Python memory profiler
+
+Docs: https://pypi.python.org/pypi/memory_profiler
+
+Analyses memory usage of a particular function, line by line
