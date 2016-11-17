@@ -70,6 +70,186 @@ or [ArcGIS Pro](http://pro.arcgis.com/en/pro-app/) have similar feature sets.
 
 ---
 
+# Data formats
+
+- shapefile
+- csv
+- geojson
+- kml
+- osm.xml, osm.pbf
+- WKT, WKB
+- sql
+
+Vector: [http://www.gdal.org/ogr_formats.html](http://www.gdal.org/ogr_formats.html)
+Raster: [http://www.gdal.org/formats_list.html](http://www.gdal.org/formats_list.html)
+
+---
+
+# Shapefile
+
+Spec: [https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf](https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf)
+
+Essential files
+- `*.shp` main file, contains geometric data
+- `*.shx` index file, contains offsets and content length for records in the main file
+- `*.dbf` dBASE table, contains the attribute table
+
+Other files
+- `*.sbn`, `*.sbx` spatial index
+- `*.prj` projection details
+- `*.shp.xml` spatial metadata
+- `*.cpg` dBASE metadata (text encoding codepage, eg `UTF8`)
+
+---
+
+# Delimited text
+
+CSV
+
+```csv
+X,Y,osm_id,timestamp,name,type
+34.4613073,31.506574,504259355,2014-08-09T17:22:21Z,Arab Bank,bank
+34.4443115,31.5201754,504263800,2012-12-18T13:47:22Z,Quds Bank,bank
+34.4552552,31.5164901,4210637190,2016-05-27T12:06:42Z,بنك القدس فرع غزة,bank
+```
+
+Tab-delimited
+
+```txt
+lon   lat osm_id  timestamp    name   type
+34.3197512  31.3034058   329170797 2009-02-17T06:55:01Z    European Gaza Hospital - مستشفى غزة ا  hospital
+34.4937895  31.5406455   503999419 2009-09-21T12:32:03Z    Palestinian Medical Relief hospital
+```
+
+---
+
+# GeoJSON
+
+Spec: [https://tools.ietf.org/html/rfc7946](https://tools.ietf.org/html/rfc7946)
+
+Guide: [http://geojson.org/](http://geojson.org/)
+
+```json
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [125.6, 10.1]
+  },
+  "properties": {
+    "name": "Dinagat Islands"
+  }
+}
+```
+
+---
+
+# KML
+
+Spec: [http://www.opengeospatial.org/standards/kml/](http://www.opengeospatial.org/standards/kml/)
+
+Guide: [https://developers.google.com/kml/](https://developers.google.com/kml/)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Placemark>
+    <name>Simple placemark</name>
+    <description>Attached to the ground. Intelligently places itself
+       at the height of the underlying terrain.</description>
+    <Point>
+      <coordinates>-122.0822035425683,37.42228990140251,0</coordinates>
+    </Point>
+  </Placemark>
+</kml>
+```
+
+---
+
+# OpenStreetMap XML
+
+Notes: [http://wiki.openstreetmap.org/wiki/OSM_XML](http://wiki.openstreetmap.org/wiki/OSM_XML)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.0.2">
+ <bounds minlat="54.0889580" minlon="12.2487570" maxlat="54.0913900" maxlon="12.2524800"/>
+ <node id="298884269" lat="54.0901746" lon="12.2482632" user="SvenHRO" uid="46882" visible="true" version="1" changeset="676636" timestamp="2008-09-21T21:37:45Z"/>
+ <node id="1831881213" version="1" changeset="12370172" lat="54.0900666" lon="12.2539381" user="lafkor" uid="75625" visible="true" timestamp="2012-07-20T09:43:19Z">
+  <tag k="name" v="Neu Broderstorf"/>
+  <tag k="traffic_sign" v="city_limit"/>
+ </node>
+ <way id="26659127" user="Masch" uid="55988" visible="true" version="5" changeset="4142606" timestamp="2010-03-16T11:47:08Z">
+  <nd ref="292403538"/>
+  <nd ref="298884289"/>
+  <tag k="highway" v="unclassified"/>
+  <tag k="name" v="Pastower Straße"/>
+ </way>
+ <relation id="56688" user="kmvar" uid="56190" visible="true" version="28" changeset="6947637" timestamp="2011-01-12T14:23:49Z">
+  <member type="node" ref="294942404" role=""/>
+  <member type="way" ref="4579143" role=""/>
+  <tag k="name" v="Küstenbus Linie 123"/>
+  <tag k="type" v="route"/>
+ </relation>
+</osm>
+```
+
+---
+
+# OpenStreetMap PBF
+
+PBF (Protocol Buffers) are a binary serialization format.
+
+Guide: [https://developers.google.com/protocol-buffers/](https://developers.google.com/protocol-buffers/)
+
+OpenStreetMap define a particular set of protocols against pbf.
+
+OSM PBF usage: [http://wiki.openstreetmap.org/wiki/PBF_Format](http://wiki.openstreetmap.org/wiki/PBF_Format)
+
+---
+
+# WKT, WKB - Well-Known Text/Binary
+
+```txt
+POINT (34.4613073 31.506574)
+```
+
+```txt
+0101000020E6100000AA6D799BED284140AE6AA400AC4D3F40
+```
+
+```txt
+POLYGON ((34.4613073 31.5067543780869,34.4613438592451 31.5067516377333,34.46137
+93076498 31.5067434999371,34.4614125681267 31.5067302119626,34.4614426300691 31.
+5067121775601,34.4614685800579 31.5066899446983,34.4614896296158 31.506664188914
+2,34.4615051391647 31.5066356927868,34.461514637459 31.5066053221585,34.46151783
+59033 31.5065739998268,34.4615146373208 31.5065426775054,34.4615051389048 31.506
+5123069068,34.4614896292656 31.5064838108247,34.4612707407549 31.5067516377333,3
+4.4613073 31.5067543780869))
+```
+
+---
+
+# SQL
+
+```sql
+INSERT INTO "public"."gaza_hospitals" (
+    "wkb_geometry" ,
+    "osm_id",
+    "timestamp",
+    "name",
+    "type"
+) VALUES (
+    '0101000020E6100000AA6D799BED284140AE6AA400AC4D3F40',
+    '329170797',
+    '2009-02-17T06:55:01Z',
+    'European Gaza Hospital - مستشفى غزة ا',
+    'hospital'
+);
+```
+
+---
+
 # ogr2ogr
 
 Docs: http://www.gdal.org/ogr2ogr.html
