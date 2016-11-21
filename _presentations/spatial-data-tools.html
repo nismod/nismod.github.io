@@ -17,8 +17,8 @@ Postgres and PostGIS for storing and querying against a database
 ## Spatial data libraries
 GDAL for handling spatial objects in code
 
-## Estimating memory usage and profiling code
-valgrind or language-specific profilers
+## Case study
+Converting statistics between geographies
 
 ---
 
@@ -313,6 +313,71 @@ CREATE TYPE data_status AS ENUM ('staged', 'approved', 'archived');
 ALTER TABLE workshop_nodes ADD COLUMN status data_status DEFAULT 'staged'
 ```
 
+---
+
+# Load data to Postgres using ogr2ogr
+
+Import to a new table:
+
+```sql
+ogr2ogr -f "PostgreSQL" PG:"dbname=test user=test password=test" <\
+  shapefile_to_import>.shp
+```
+
+Append to an existing table:
+
+```bash
+ogr2ogr -update -append -f "PostgreSQL" PG:"dbname=test user=test password=test" \
+  Gaza_electricity_sinks.shp -nln sos_i_nodes \
+  -sql "SELECT Name as node_name, 'electricity_sink' as type, ID as ref_key, 'gaza' as area, 2 as data_source_id FROM Gaza_electricity_sinks"
+```
+
+`-nln` specifies the table name
+
+`-sql` lets you select which shapefile attributes to import. It also allows
+matching attributes to column names (`ID as ref_key`) and setting the value
+for specific columns (`2 as data_source_id`)
+
+---
+
+# Query by location
+
+Within a 300m radius of a point
+(here the point is constructed from WellKnownText, and the fact that we're using
+lat/lng values is specified by the SRID [4326](http://epsg.io/4326))
+
+```sql
+  SELECT * FROM events WHERE ST_DWithin(
+    events.the_geom,
+    ST_GeomFromText('POINT(51.2 1.3)', 4326),
+    300
+  ));
+```
+
+Anything intersecting a bounding box:
+(fill in values for x/y min/max and your SRID)
+
+```sql
+  SELECT * FROM sos_i_nodes
+  WHERE events.the_geom && ST_MakeEnvelope(xmin, ymin, xmax, ymax, srid);
+```
+
+---
+
+# Query spatial measurements
+
+Docs: [http://postgis.net/docs/reference.html#Spatial_Relationships_Measurements](http://postgis.net/docs/reference.html#Spatial_Relationships_Measurements)
+
+```sql
+SELECT road_id, ST_Length(the_geom)
+FROM all_roads;
+```
+
+```sql
+ALTER TABLE output_areas ADD COLUMN area real;
+
+UPDATE output_areas SET area = SELECT ST_Area(the_geom);
+```
 
 ---
 
@@ -327,7 +392,8 @@ Comes installed with OSGeo4W or QGIS.
 C++/C library with [bindings](https://trac.osgeo.org/gdal/wiki#GDALOGRInOtherLanguages)
 for other languages.
 
-- Python [https://pypi.python.org/pypi/pygdal/1.10.1.0](https://pypi.python.org/pypi/pygdal/1.10.1.0)
+- fiona for Python [https://github.com/Toblerity/Fiona](https://github.com/Toblerity/Fiona)
+- pygdal [https://pypi.python.org/pypi/pygdal/1.10.1.0](https://pypi.python.org/pypi/pygdal/1.10.1.0)
 - Java [https://trac.osgeo.org/gdal/wiki/GdalOgrInJava](https://trac.osgeo.org/gdal/wiki/GdalOgrInJava)
 - C# [https://trac.osgeo.org/gdal/wiki/GdalOgrInCsharp](https://trac.osgeo.org/gdal/wiki/GdalOgrInCsharp)
 - R [https://cran.r-project.org/web/packages/rgdal/index.html](https://cran.r-project.org/web/packages/rgdal/index.html)
@@ -335,8 +401,6 @@ for other languages.
 ---
 
 # GDAL capabilities
-
-Cookbook: https://pcjericks.github.io/py-gdalogr-cookbook/index.html
 
 Do any common spatial operation programmatically
 - create points, lines, polygons
@@ -347,26 +411,23 @@ Do any common spatial operation programmatically
 
 ---
 
-# Valgrind
+# GEOS
 
-Docs: [http://valgrind.org/docs/manual/manual.html](http://valgrind.org/docs/manual/manual.html)
+[https://trac.osgeo.org/geos](https://trac.osgeo.org/geos)
 
-A suite of tools that run on Linux and UNIX platforms (including Mac OS X).
+C++ port of the Java Topology Suite [JTS](http://tsusiatsoftware.net/jts/main.html)
 
-Massif: [http://valgrind.org/info/tools.html#massif](http://valgrind.org/info/tools.html#massif)
-
-Massif is a heap profiler, it analyses and tracks a program's heap usage and memory allocations.
-
-Graph total program memory usage.
-
-<small>Note: the 'heap' is one kind of memory area provided by an operating system for
-a program to store values; the other kind is the 'stack'. High level languages
-(like Python or Java) don't generally expose these details to the programmer.</small>
+- Shapely for Python [https://pypi.python.org/pypi/Shapely/](https://pypi.python.org/pypi/Shapely/)
+- GeoTools for Java [http://www.geotools.org/](http://www.geotools.org/)
 
 ---
 
-# Python memory profiler
+# Case study
 
-Docs: https://pypi.python.org/pypi/memory_profiler
-
-Analyses memory usage of a particular function, line by line
+- pick small area
+- import buildings from osm
+- import output areas with population
+- import Local Authority districts as reporting area
+- import grid as reporting area
+- assume uniform / divide area to calculate pop per reporting area
+- assign pop to buildings, intersect with grid and provide alternative calculation
