@@ -306,13 +306,37 @@ Docs: https://trac.osgeo.org/geotiff/
 
 Docs: http://www.gdal.org/ogr2ogr.html
 
-- convert between formats (shp/osm/geojson/csv/sql...)
-- transform between coordinate systems (WGS84/OSGB36/Web mercator...)
-- clip regions
-- simplify geometries
-- filter fields
+**convert** between formats (shp/osm/geojson/csv/sql...)
 
-Other GDAL utilities: http://gdal.org/gdal_utilities.html
+`ogr2ogr -f GeoJSON cities.json cities.shp`
+
+**transform** between coordinate systems (WGS84/OSGB36/Web mercator...)
+
+`ogr2ogr -t_srs EPSG:27700 cities_osgb.shp cities.shp`
+
+**clip** regions
+
+`ogr2ogr -f "ESRI Shapefile" output.shp input.shp -clipsrc <xmin> <ymin> <xmax> <ymax>`
+
+**simplify** geometries
+
+`ogr2ogr output.shp input.shp -simplify 0.0001`
+
+**filter** on fields
+
+`ogr2ogr -where "type = pond" ponds.shp water.shp`
+
+
+---
+
+# Other GDAL utilities
+
+Docs: http://gdal.org/gdal_utilities.html
+
+- `gdalinfo` - report information about a file
+- `gdalwarp` - warp an image into a new coordinate system
+- `gdalbuildvrt` - build a VRT (virtual dataset) from a list of datasets
+- `gdal_contour` - contours from DEM (digital elevation map)
 
 ---
 
@@ -372,8 +396,8 @@ ALTER TABLE workshop_nodes ADD COLUMN status data_status DEFAULT 'staged'
 Import to a new table:
 
 ```sql
-ogr2ogr -f "PostgreSQL" PG:"dbname=test user=test password=test" <\
-  shapefile_to_import>.shp
+ogr2ogr -f "PostgreSQL" PG:"dbname=test user=test password=test" \
+  <shapefile_to_import>.shp
 ```
 
 Append to an existing table:
