@@ -67,6 +67,167 @@ or [ArcGIS Pro](http://pro.arcgis.com/en/pro-app/) have similar feature sets.
     - style
     - labels
 
+---
+
+# QGIS: open project
+
+QGIS organises work into projects, projects have layers of data.
+
+![Open QGIS project](/fig/qgis-1-open.png)
+
+---
+
+# Download data
+
+**Edina** provide boundary data for the UK.
+
+[InFuse United Kingdom Output Areas, 2011](https://census.edina.ac.uk/easy_download_data.html?data=infuse_uk_2011)
+
+[English Districts, UAs and London Boroughs, 2011, Clipped](https://census.edina.ac.uk/easy_download_data.html?data=England_lad_2011)
+
+<small>
+Contains National Statistics data © Crown copyright and database right 2016<br>
+Contains NRS data © Crown copyright and database right 2016<br>
+Source: NISRA : Website: www.nisra.gov.uk<br>
+Contains OS data © Crown copyright [and database right] (2016)
+</small>
+
+**ONS** provide census statistics.
+
+[Key and Quick Statistics for Output Areas in the UK](http://data.statistics.gov.uk/Census/KS_QS_OA_UK_V1.zip)
+
+<small>
+Source: Office for National Statistics, Northern Ireland Statistics and Research Agency,<br>
+National Records of Scotland © Crown Copyright 2014
+</small>
+
+---
+
+# QGIS: add layer
+
+Use the menu `Layer > Add Layer > Add Vector Layer` or the icon in the sidebar
+to add a vector layer (here a shapefile).
+
+![Add shapefile vector layer](/fig/qgis-2-shapefile.png)
+
+---
+
+# QGIS: add layer
+
+The layer appears in the layers panel. The order here corresponds to the
+drawing order, so higher layers will cover lower layers.
+
+![View layer](/fig/qgis-3-layer.png)
+
+---
+
+# QGIS: view attribute table
+
+Right click on the layer in the layers panel, or use the icon to open the
+attributes table.
+
+![View attribute table](/fig/qgis-4-table.png)
+
+---
+
+# QGIS: identify an object
+
+Use the identify tool to query an object's attributes.
+
+![Identify item](/fig/qgis-5-identify.png)
+
+---
+
+# QGIS: add labels to a layer
+
+Right click on a layer to edit its properties, go to labels and select the
+attribute to use as a label.
+
+![Add labels](/fig/qgis-6-label.png)
+
+---
+
+# QGIS: change displayed projection
+
+Coordinate reference system (CRS) is a project-wide property, and can be
+changed so that each layer is re-projected on the fly.
+
+![EPSG:4326 projection](/fig/qgis-7-crs4326.png)
+
+---
+
+# QGIS: change displayed projection
+
+For the UK, the Ordnance Survey/British National Grid reference system (also
+encoded as OSGB36 or EPSG:27700) minimises distortion.
+
+![EPSG:27700 projection](/fig/qgis-7-crs27700.png)
+
+---
+
+# QGIS: add a csv
+
+Use the menu `Layer > Add Layer > Add Delimited Text Layer` or the icon in the
+sidebar to add a csv. Check the field properties to see that the data types are
+correct.
+
+![Add csv](/fig/qgis-8-csv.png)
+
+???
+CSVs don't natively contain type information, so QGIS will make an informed
+guess. You might need to clean your csv data to help (remove thousands
+separators, delete any non-data rows other than a single header row).
+
+It is also possible to create a `*.csvt` file, which specifies the data type of
+each column of the `*.csv` file of the same name.
+
+---
+
+# QGIS: join a table to a vector layer
+
+In layer properties, go to joins and add a join, selecting the layer to pull
+from and the "join" and "target" fields from each layer that share a value
+(usually some ID).
+
+![Join table to shapefile](/fig/qgis-9-join.png)
+
+---
+
+# QGIS: join a table to a vector layer
+
+Check the results in the layer's attribute table. The columns from the csv
+should have appeared.
+
+![Join results](/fig/qgis-10-joined.png)
+
+---
+
+# QGIS: edit layer style
+
+Plotting total population counts for each output area. Right click on a layer
+to see its properties and edit the style. Pick 'graduated' to represent a
+scalar value, pick the column to show and a colour ramp to use, then classify
+and apply.
+
+![Style by number](/fig/qgis-11-style.png)
+
+???
+
+There are several ways of generating colour classes, including custom breaks,
+equal interval or quantile.
+
+Jenks natural breaks is an optimisation method which minimises the variance
+within classes while maximizing the variance between classes.
+
+
+---
+
+# QGIS: edit layer style
+
+Plotting population density, rather than absolute counts. Select the column,
+reclassify and apply to see the results.
+
+![Style by density](/fig/qgis-12-style-density.png)
 
 ---
 
