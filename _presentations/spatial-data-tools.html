@@ -624,7 +624,7 @@ Comes installed with OSGeo4W or QGIS.
 
 - Windows binaries are maintained at: [http://www.gisinternals.com/](http://www.gisinternals.com/) (or [build](https://trac.osgeo.org/gdal/wiki/BuildingOnWindows))
 - Mac binaries are available at: [http://www.kyngchaos.com/software/frameworks#gdal_complete](http://www.kyngchaos.com/software/frameworks#gdal_complete) or `brew install gdal`
-- Ubuntu has a default package: `sudo apt-get install gdal-bin` (or [build])
+- Ubuntu has a default package: `sudo apt-get install gdal-bin`
 
 C++/C library with [bindings](https://trac.osgeo.org/gdal/wiki#GDALOGRInOtherLanguages)
 for other languages.
@@ -639,23 +639,33 @@ for other languages.
 
 # GDAL capabilities
 
-Do any common spatial operation programmatically
-- create points, lines, polygons
-- calculate length, area, buffer
-- calculate intersection, union
-- filter geometries by attribute
+Do any ogr2ogr operation programmatically
 - read or write to spatial data formats
+- create points, lines, polygons
+- filter geometries by attribute
+- reproject data
 
 ---
 
 # GEOS
 
-[https://trac.osgeo.org/geos](https://trac.osgeo.org/geos)
+Docs: [https://trac.osgeo.org/geos](https://trac.osgeo.org/geos)
 
-C++ port of the Java Topology Suite [JTS](http://tsusiatsoftware.net/jts/main.html)
+C++ port of the Java Topology Suite [JTS](http://tsusiatsoftware.net/jts/main.html);
+used by PostGIS for many spatial functions.
 
+Libraries:
 - Shapely for Python [https://pypi.python.org/pypi/Shapely/](https://pypi.python.org/pypi/Shapely/)
 - GeoTools for Java [http://www.geotools.org/](http://www.geotools.org/)
+
+---
+
+# GEOS capabilities
+
+Do any common spatial operation programmatically
+- create points, lines, polygons
+- evaluate spatial predicates: intersects, touches, within, contains, overlaps, covers
+- perform operations: union, distance, intersection, convex hull, envelope, buffer, simplify, area, length
 
 ---
 
