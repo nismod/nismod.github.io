@@ -62,9 +62,30 @@ layout: presentation
   </tr>
 </table>
 
+???
+
+- determine the similarities and differences between the sector models
+- facilitated workshop, 20 minute segments
+
+1. we start off with a broad overview of each of the
+sectors, think about the challenges and opportunities in each of the
+sectors over the coming decades, and list key infrastructure service demands.
+
+2. after coffee, we'll begin to dig into the details of the
+sector models. We'll begin to identify the chain of data and processes
+through each of the models.
+
+3. after lunch: ideas around the integration of the models,
+the capacity planning problem and the decision layer
+within the framework.
+
+Will generate the content to write a paper on the design and implementation
+of infrastructure system models highlighting the similarities and differences
+between the models and approaches.
+
 ---
 
-# Sectors
+# Sector Attendees
 
 - Energy Supply
     - Lahiru
@@ -80,11 +101,73 @@ layout: presentation
     - Mohammad
     - Vassilis
 
+???
+
+In the group today we have representation from across the consortium.
+
+---
+
+# Cross-cutting Attendees
+
+- Risk
+    - Scott
+    - Yu Jiang
+- Agent Based Modelling
+    - Adrian
+- Economics
+    - Philip
+- Demographics & population
+    - Jamie
+- Database and Software
+    - Craig
+    - Tom
+- Decision and Integration
+    - Will
+
+---
+
+# Version Control Review [45 mins]
+
+## Activity
+
+Use _git_ to upload documents to your sector model repository
+
+```bash
+cd <directory> # Change to a directory
+ls # lists the files in the directory
+```
+```bash
+git clone https://github.com/nismod/<sector>.git # Pull the code from github
+```
+```bash
+git add <document>
+git commit -m "Added documents to folder"
+```
+```bash
+git remote -v # List your remote servers (connection to repository on Github)
+git push origin master
+```
+
+The [Git Presentation](../presentations/git-novice.html) from the induction
+workshop is available online for further reference
+
+???
+A quick review of Version Control using Git and Github.
+---
+
+# Session 1a: 10:00 to 11:00
+
+## Aims
+
+- generate the content for a working paper on the sector models
+
+
+???
 
 
 ---
 
-# Groups
+## Groups
 
 <table>
   <tr>
@@ -174,16 +257,15 @@ layout: presentation
   </tr>
 </table>
 
----
+???
 
-# Session 1a: 10:00 to 11:00
+
 
 ---
 
 # 1.1. An overview of the sector [20 mins]
 
 ## Sit in groups at the sector tables
-
 
 - In 3 bullet points, outline the networks, technologies
 and infrastructure assets that characterize the sector
@@ -194,6 +276,21 @@ and the other infrastructure sectors
 --
 
 - In 3 bullet points, identify the potential avenues for change in the sector
+
+???
+
+_Sit in groups at the sector tables_
+
+Together:
+
+- In 3 bullet points, outline the networks, technologies
+and infrastructure assets that characterise the sector
+- In 3 bullet points, identify the key relationships between your table sector
+and the other infrastructure sectors
+- In 3 bullet points, identify the potential avenues for change in the sector
+
+__Present__ these overviews to the whole group
+
 
 ---
 
@@ -214,6 +311,27 @@ Any other suggestions?
 - For each of these, identify the most important effect these may have on your
 table sector
 
+???
+_Swap tables_
+
+At a high level, there are considerable challenges facing society over the next
+40 to 80 years.  The challenges can also be viewed as opportunities.
+
+These challenges and opportunities include:
+
+- technological change
+- climate change
+- population growth, migration and an ageing population
+- economic growth and growing inequality
+
+Any other suggestions?
+
+Within the group _[10 minutes]_
+
+- For each of these, identify the most important effect these may have on your
+table sector
+
+Discuss in the whole group _[10 minutes]_
 ---
 
 # 1.3. Infrastructure service demands
@@ -235,6 +353,20 @@ model?
 
 - Place the post-it-notes on the spatio-temporal grid.
 
+???
+
+_Swap tables_
+
+Identify, and list, using __green__ post-it-notes, the top three most important
+infrastructure service demands relevant to the sector.
+
+Use one PostIt for each. Note the initials of the sector on the PostIt.
+
+At what temporal and spatial scale are these service demands required in the
+model?
+
+Place the post-it-notes on the spatio-temporal grid.
+
 ---
 
 # Coffee 11:00 to 11:15
@@ -242,6 +374,15 @@ model?
 ---
 
 # Session 1b: 11:15 to 13:00
+
+## Aims
+
+- identify
+    - key socio-economic drivers of infrastructure services
+    - model parameters
+    - outputs and metrics
+- compose a data flow-diagram of the sector model
+- reflect on spatio-temporal data issues
 
 ---
 
@@ -279,6 +420,21 @@ for the model?
 
 Place the PostIt notes on the spatio-temporal grid.
 
+???
+
+_Swap tables_
+
+Identify, and list, using __blue__ post-it-notes, the socio-economic
+drivers of the three most important infrastructure service demands on the
+spatio-temporal grid.
+
+Use one PostIt for each. Note the initials of the sector on the PostIt.
+
+At what temporal and spatial scale are these socio-economic drivers required
+for the model?
+
+Place the PostIt notes on the spatio-temporal grid.
+
 ---
 
 # 1.5. Identify key metrics [20 mins]
@@ -306,6 +462,25 @@ on the spatio-temporal grid.
 metrics?
     - How could measures of risk be used in the operational or planning problems?
 
+???
+
+Individually.
+
+On __red__ PostIt notes, identify and list, measurements of performance
+(metrics) relevant to your sector.
+
+Use one PostIt for each. Note the initials of the sector on the PostIt.
+
+Place the metric PostIt notes in the appropriate grid squares
+on the spatio-temporal grid.
+
+Together:
+
+- Discuss how do performance metrics across the sectors relate to one another?
+- What is the appropriate temporal and spatial scale at which to measure these
+metrics?
+- How could measures of risk be used in the operational or planning problems?
+
 ---
 
 # 1.6. Draw a data-flow diagram [15 mins]
@@ -329,6 +504,31 @@ metrics?
 - Where is that stored?
 - Are there any gaps?
 
+???
+
+__Back to starting tables__
+
+A data-flow diagram consists of four element types:
+
+- a process (circle)
+- a data-store (horizontal parallel lines)
+- an input/output (a rectangle)
+- a flow (an arrow)
+
+Choose one 'route' through your sector model, and draw a data-flow diagram
+using these element types, from socio-economic driver,
+all the way through the model to an output metric.
+
+- Choose a socio-economic driver
+- Choose a performance metric
+- How is the driver stored?
+- What process works on the socio-economic driver to generate an infrastructure
+  service demand?
+- What extra data is required in the model?
+- Where is that stored?
+
+Pay close attention to the processes.  Are there any gaps?
+
 ---
 
 # 1.7. Different types of data [15 mins]
@@ -349,6 +549,22 @@ metrics?
 ???
 
 Source, spatial resolution, temporal resolution
+
+Model inputs can be categorised into:
+
+- static model parameters - required by every instance of a model
+- dynamic model parameters - parameters that change over time
+- state parameters - persistent between years
+- decision variables - such as assets in which investments can be made
+
+Model outputs could be categorised as:
+
+- results - e.g. simulation data
+- metrics - e.g. performance indicator
+- accounting - e.g. emissions, financials
+
+Think of an example for each of these categories.  At what spatio-temporal
+scale are these required for the sector model?
 
 ---
 
@@ -376,6 +592,28 @@ In your sectors, produce one example for each of:
 
 Does the draft data schema cover all types of entities in your simulation model?
 
+???
+
+__Look at the draft data schema.__
+
+Note the distinction between an abstract entity, and an instance of an entity?
+
+We'll touch more on _assets_ later.
+
+In your sector, produce one example for each of:
+
+- an asset
+- a demand hub
+- a supply hub
+- a service demand
+- a commodity
+- a condition
+
+__Discuss together__
+
+Does the draft data schema cover all types of entities in your simulation model?
+
+
 ---
 
 # 1.9. The spatio-temporal grid [15 mins]
@@ -393,6 +631,23 @@ Does the draft data schema cover all types of entities in your simulation model?
 - Is this two-dimensional diagram a useful approximation of the issues?
 - Have we identified anything we didn't know before?
 
+???
+
+Each individual:
+
+- Identify something that you agree with
+- Identify something that you disagree with
+
+__Go around the whole group__
+
+Alternate in something you agreed/disagree with on the spatio-temporal grid.
+
+__Discuss__
+
+- What have we missed out?
+- Is this two-dimensional diagram a useful approximation of the issues?
+- Have we identified anything we didn't know before?
+
 ---
 
 # Lunch 13:00 to 13:30
@@ -400,6 +655,26 @@ Does the draft data schema cover all types of entities in your simulation model?
 ---
 
 # Session 2: 13:30 to 15:00
+
+## Aims
+
+- identify
+    - infrastructure assets
+    - dependencies
+- link decisions to assets and other interventions
+- distinguish the planning 'problem' from simulation of operation
+
+???
+
+The aim of this session is to provoke discussion and ideas around the
+integration of the models, the capacity planning problem and the decision layer
+within the framework.
+
+- 1. List infrastructure assets [20 mins]
+- 2. Distinguish between 'planning' and 'simulation' problems [20 mins]
+- 3. Strategic Investment Rules [20 mins]
+- 4. Identify key decision variables [20 mins]
+- 5. Identify dat flow between simulation models [10 mins]
 
 ---
 
@@ -423,6 +698,23 @@ of infrastructure __assets__ for each of the sectors.
 - What's the most appropriate spatial resolution?
 - Where are the assets located?
 
+???
+
+__Work in pairs with someone from a different sector team.__
+
+Using the draft data schema, identify and list some examples of infrastructure
+__assets__ and __commodities__ for each of the sectors.
+
+Pick one asset:
+
+- What __attributes__ are associated with this asset?
+- Is the __asset__ associated with an investment decision?
+- How does the availability of the asset affect system operation?
+- How do the asset __attributes__ affect system operation?
+- What's the most appropriate spatial resolution?
+
+Present your findings to the rest of the group.
+
 ---
 
 # 2.2a. 'planning' versus 'simulation' [20 mins]
@@ -440,6 +732,14 @@ of infrastructure __assets__ for each of the sectors.
 - how does the system perform?
     - how much does it cost to operate?
     - does the system meet demand?
+
+???
+
+__Form back into your groups__
+
+Back in the induction workshop, we touched on the distinction between the
+planning problem, which occurs on an annual or decadal scale, and the
+simulation problem, which occurs within a year.
 
 ---
 
@@ -469,6 +769,21 @@ to a decision to invest.
 This could be the form of an if-else-then statement, or a graph showing a
 threshold or relationship between an output and investment.
 
+???
+
+What is the relationship between operation of the sector and planning
+in the sector?
+
+- what would provoke an investment (in capacity, efficiency improvements,
+  demand reduction)?
+- who makes the decision to invest?
+- is investment reactionary, or planned?
+
+Write a rule which relates an output from the model to a decision to invest.
+
+This could be the form of an if-else-then statement, or a graph showing a
+threshold or relationship between an output and investment.
+
 ---
 
 # 2.4. Key decision variables [20 mins]
@@ -492,7 +807,7 @@ Some examples:
 
 ---
 
-# 2.5. Inputs Required
+# 2.5. Data flow between models [10 mins]
 
 ## Identify three sector model inputs which are produced by
 
@@ -502,3 +817,39 @@ Some examples:
 
 - a socio-economic scenario attribute
 - a change in technology
+
+--
+
+## In what spatio-temporal resolution are they required?
+
+(hint - look at the spatio-temporal grid)
+
+## Does this differ across models?
+
+???
+
+The model boundary defines what you include in the sector model, and what you
+leave out. In some cases, what you leave out needs to come from somewhere.
+Who supplies that information?
+
+A model boundary may exist along various dimensions.
+One is the subject of the modelling e.g. planning or operation.
+Another is data focussed - which could be due to
+spatial reasons, or modelling in silos. Or, it could be due to previous use of
+a model had different expectations about data availability.
+
+Focussing closely on the simulation model of the sector,
+identify three model inputs which are produced by
+
+- another sector model (a dependency)
+
+- a socio-economic scenario
+
+- an improvement in technology
+
+In what spatio-temporal resolution are they required (hint - look at the
+  spatio-temporal grid)?
+
+_Discuss_
+
+Together discuss any gaps which have been identified.
