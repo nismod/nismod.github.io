@@ -3056,3 +3056,36 @@ git merge <other_branch_name>
 
 ![GUI merge](/fig/gitgui-merge.png)
 
+---
+
+# Pull request
+
+Pull requests mean that you can publish your changes for review before they
+get merged in to the master branch or main repository.
+
+```bash
+git push origin <branch_name>
+```
+If you use the command line, you need to go online to make the pull request.
+
+![GUI pull request](/fig/gitgui-pull-request.png)
+
+---
+
+# Accepting a pull request
+
+![Online pull request](/fig/gitgui-pull-request-online.png)
+
+---
+
+# Accepting a pull request
+
+Review the pull request, perhaps requesting changes, then accept it to merge.
+
+Pull the remote changes back down to your local repository.
+
+```bash
+git checkout master
+git pull
+```
+
