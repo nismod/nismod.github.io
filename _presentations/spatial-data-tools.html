@@ -231,6 +231,18 @@ reclassify and apply to see the results.
 
 ---
 
+# Questions
+
+Preview data in desktop GIS
+- add layers
+- view tables
+- join data
+- edit style
+
+Next: data formats
+
+---
+
 # Data formats
 
 Vector: [http://www.gdal.org/ogr_formats.html](http://www.gdal.org/ogr_formats.html)
@@ -463,6 +475,16 @@ Docs: https://trac.osgeo.org/geotiff/
 
 ---
 
+# Questions
+
+Data formats
+- vector formats
+- raster formats
+
+Next: converting data
+
+---
+
 # ogr2ogr
 
 Docs: http://www.gdal.org/ogr2ogr.html
@@ -498,6 +520,18 @@ Docs: http://gdal.org/gdal_utilities.html
 - `gdalwarp` - warp an image into a new coordinate system
 - `gdalbuildvrt` - build a VRT (virtual dataset) from a list of datasets
 - `gdal_contour` - contours from DEM (digital elevation map)
+
+---
+
+# Questions
+
+Converting data
+- between formats
+- between coordinate systems
+- filtering and clipping
+- other tools
+
+Next: spatial databases
 
 ---
 
@@ -618,6 +652,18 @@ UPDATE output_areas SET area = SELECT ST_Area(the_geom);
 
 ---
 
+# Questions
+
+Spatial databases
+- create a database
+- load data
+- query data
+- spatial analysis
+
+Next: libraries
+
+---
+
 # GDAL
 
 Comes installed with OSGeo4W or QGIS.
@@ -669,6 +715,16 @@ Do any common spatial operation programmatically
 
 ---
 
+# Questions
+
+Libraries
+- reading and writing spatial data formats
+- spatial analysis, logical operations
+
+Next: case study
+
+---
+
 # Case study
 
 - pick small area
@@ -698,3 +754,12 @@ Do any common spatial operation programmatically
 
 ![Population density by grid cell](/fig/maup-grid.png)
 
+---
+
+# Questions
+
+- how to unpack the necessary functions for interpolating or assigning
+  probability mass to areas
+- assigning points to a network?
+- assigning areas of influence to a set of points?
+- other spatial problems?
