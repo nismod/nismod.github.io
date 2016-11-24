@@ -1,5 +1,5 @@
 ---
-title: ITRC-MISTRAL Design-a-thon Facilitated Workshop
+title: Design-a-thon Facilitated Workshop
 layout: presentation
 ---
 
@@ -173,12 +173,14 @@ layout: presentation
     <td>ES</td>
   </tr>
 </table>
+
 ---
 
 # Session 1a: 10:00 to 11:00
+
 ---
 
-# 1. An overview of the sector [20 mins]
+# 1.1. An overview of the sector [20 mins]
 
 ## Sit in groups at the sector tables
 
@@ -195,7 +197,7 @@ and the other infrastructure sectors
 
 ---
 
-# 2. Opportunities and challenges [20 mins]
+# 1.2. Opportunities and challenges [20 mins]
 
 ## Swap tables
 
@@ -214,7 +216,7 @@ table sector
 
 ---
 
-# 3. Infrastructure service demands
+# 1.3. Infrastructure service demands
 
 ## Swap tables [20 mins]
 
@@ -234,13 +236,16 @@ model?
 - Place the post-it-notes on the spatio-temporal grid.
 
 ---
+
 # Coffee 11:00 to 11:15
+
 ---
 
 # Session 1b: 11:15 to 13:00
+
 ---
 
-# 4a. Socio-economic variables
+# 1.4a. Socio-economic variables
 
 ## Available Variables
 - Individual Demographics:
@@ -254,9 +259,10 @@ model?
     - Households - Number of Rooms/Bedrooms, central heating, accommodation type.
     - Occupant(s) - Number of occupants, Tenure, people per room, composition (multiple ethnicities/religions), languages, occupancy rating, household type (e.g. cohabiting), Number of dependents.
     - HRP Data - Similar to Individuals.
+
 ---
 
-# 4b. Drivers of service demands [20 mins]
+# 1.4b. Drivers of service demands [20 mins]
 
 ## Swap tables
 
@@ -275,7 +281,7 @@ Place the PostIt notes on the spatio-temporal grid.
 
 ---
 
-# 5. Identify key metrics [20 mins]
+# 1.5. Identify key metrics [20 mins]
 
 In the wider infrastructure debate, [infrastructure performance indicators](http://research.ncl.ac.uk/ibuild/outputs/reports/ICIF&iBUILD%20Indicators%20Interim%20Summary%20Report%20Final.pdf)
  can be used to monitor:
@@ -302,17 +308,12 @@ metrics?
 
 ---
 
-# 6a. Draw a data-flow diagram [15 mins]
+# 1.6. Draw a data-flow diagram [15 mins]
 
 ## A data-flow diagram consists of four element types
 
 <img src="../assets/img/dataflow.svg" alt="Data flow syntax" align="left" hspace="30"/>
 
-
-<!-- .left[![Data flow syntax](../assets/img/dataflow.svg)] -->
-
-
-<!-- # 6b. Draw a data-flow diagram [15 mins] -->
 --
 
 - Choose a socio-economic driver
@@ -330,9 +331,7 @@ metrics?
 
 ---
 
-# 7. Different types of data [15 mins]
-
-
+# 1.7. Different types of data [15 mins]
 
 ## Model inputs can be categorised into:
 
@@ -346,11 +345,14 @@ metrics?
 - results - e.g. simulation data
 - metrics - e.g. performance indicator
 - accounting - e.g. emissions, financials
+
 ???
+
 Source, spatial resolution, temporal resolution
+
 ---
 
-# 8. Data schema [15 mins]
+# 1.8. Data schema [15 mins]
 
 ## In pairs (with someone from another sector)
 
@@ -376,7 +378,7 @@ Does the draft data schema cover all types of entities in your simulation model?
 
 ---
 
-# 9. The spatio-temporal grid [15 mins]
+# 1.9. The spatio-temporal grid [15 mins]
 
 ## Individually, look at the spatio-temporal grid populated with Post-It notes
 
@@ -401,7 +403,7 @@ Does the draft data schema cover all types of entities in your simulation model?
 
 ---
 
-# 1. Infrastructure assets [20 mins]
+# 2.1. Infrastructure assets [20 mins]
 
 ## Work in pairs with someone from a different sector team
 
@@ -422,7 +424,8 @@ of infrastructure __assets__ for each of the sectors.
 - Where are the assets located?
 
 ---
-# 2a. 'planning' versus 'simulation' [20 mins]
+
+# 2.2a. 'planning' versus 'simulation' [20 mins]
 
 ## __The planning problem__
 
@@ -437,9 +440,10 @@ of infrastructure __assets__ for each of the sectors.
 - how does the system perform?
     - how much does it cost to operate?
     - does the system meet demand?
+
 ---
 
-# 2b. 'planning' versus 'simulation' [20 mins]
+# 2.2b. 'planning' versus 'simulation' [20 mins]
 
 ## Discuss in pairs
 
@@ -453,11 +457,9 @@ of infrastructure __assets__ for each of the sectors.
     - Are these important for the planning problem? e.g. capital cost intensive renewables versus
   operational cost intensive coal plants?
 
-
 ---
 
-
-# 3. Strategic Investment Rules [20 mins]
+# 2.3. Strategic Investment Rules [20 mins]
 
 ## What is the relationship between operation of the sector and planning of the sector?
 
@@ -467,9 +469,9 @@ to a decision to invest.
 This could be the form of an if-else-then statement, or a graph showing a
 threshold or relationship between an output and investment.
 
-
 ---
-# 4. Key decision variables [20 mins]
+
+# 2.4. Key decision variables [20 mins]
 
 _A decision variable is a parameter that is associated with an investment
 (or any other kind of) decision, whose value is determined by the strategic
@@ -484,18 +486,19 @@ The value of a decision variable can be
 Some examples:
 
 - build a 1 GW nuclear power station in location _x_ in 2017
-- reduce residential water demand (through free water widgets) by 6Ml/day
+- reduce residential water demand (through free water widgets) by 6Ml/day in catchment _y_ in 2023
 
-Identify three different targets for decision variables in your sector model
-with some examples.
+## Identify three different targets for decision variables in your sector model with some examples.
 
 ---
-# 5. Inputs Required
+
+# 2.5. Inputs Required
 
 ## Identify three sector model inputs which are produced by
 
 - another sector model (a dependency)
+    - a price, result or metric
+    - provision of an infrastructure service
 
-- a socio-economic scenario
-
-- an improvement in technology
+- a socio-economic scenario attribute
+- a change in technology
