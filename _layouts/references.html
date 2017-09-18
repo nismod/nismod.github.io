@@ -4,13 +4,13 @@ layout: default
 <div class="home">
   {{ content }}
 
-  <h1 class="page-heading">Presentations</h1>
+  <h1 class="page-heading">References</h1>
 
   <ul class="post-list">
-    {% for presentation in site.presentations %}
+    {% for reference in site.references %}
       <li>
         <h2>
-          <a class="post-link" href="{{ presentation.url | relative_url }}">{{ presentation.title | escape }}</a>
+          <a class="post-link" href="{{ reference.url | relative_url }}">{{ reference.title | escape }}</a>
         </h2>
       </li>
     {% endfor %}
