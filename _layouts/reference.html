@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title | strip_html }}</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Ubuntu:500);
+
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      h1, h2, h3 {
+        font-family: 'Ubuntu';
+        font-weight: 500;
+      }
+      .remark-slide-content:after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 40px;
+
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+
+        background-image: url('/assets/img/epsrc.png');
+        background-repeat: no-repeat;
+      }
+      .remark-slide-content h1 {
+        margin: -20px -80px 0 -80px;
+        box-sizing: border-box;
+        padding: 1em 0.25em 1em 35%;
+
+        font-size: 1.5em;
+
+        background-image: url('/assets/img/slide-header-bg.png');
+        background-repeat: no-repeat;
+        background-position: top center;
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+      }
+      .remark-slide-content h2 {
+        font-size: 1.25em;
+        margin: 1em 0 0.5em;
+      }
+      .remark-slide-content p {
+          margin: 0.5em 0;
+      }
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono';
+        color: #444;
+        background: #f0f0f0;
+      }
+      .remark-code {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        background: #eafeff;
+      }
+      .bash .remark-code-line:before {
+        content: '$ ';
+        color: #777;
+      }
+      .remark-inline-code {
+        padding: 0.15em 0.25em;
+      }
+      li {
+        padding: 0.25em 0 0.25em 0;
+      }
+      a {
+        color: #000e78;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #0e7800;
+      }
+      .fit-image {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
+        height: 90%;
+        width: 100%;
+        display: table;
+      }
+      .remark-slide-content img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source" markdown="0">
+        {{ content }}
+    </textarea>
+    <script src="{{ page.root }}/assets/js/remark-0.14.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        navigation: {scroll: false},
+        countIncrementalSlides: false
+      });
+    </script>
+  </body>
+</html>
