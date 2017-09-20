@@ -29,7 +29,7 @@ throughout a project, this improves readability and helps to avoid defects in
 the software because of misinterpetations. We are aiming to achieve the
 following code style standards in our development team.
 
-* Python: [PEP 8](www.python.org/dev/peps/pep-0008)
+* Python: [PEP 8](https://www.python.org/dev/peps/pep-0008)
 * C#: to confirm
 * Java: to confirm
 
@@ -40,7 +40,7 @@ automatic code quality checker can help to automatically check programming code
 for deviations from the defined standard. We recommend to use the following
 tools.
 
-* Python: [pylint](www.pylint.org) and [flake8](http://flake8.pycqa.org/en/latest/)
+* Python: [pylint](https://www.pylint.org) and [flake8](http://flake8.pycqa.org/en/latest/)
 * C#: to confirm
 * Java: to confirm
 
@@ -56,13 +56,13 @@ activities that are planned for the next week and which issues are blocking
 items to progress further. The meeting is intended to be short and to-the-point,
 the goal is to share progress and to ensure that issues are raised and discussed
 within the group. Every meeting is seated by a chairholder and notes are shared
-via the #general channel of [slack](http://nismod.slack.com/).
+via the #general channel of [slack](https://nismod.slack.com/).
 
 ### Issue tracking
 An issue tracker is a system that is intended to create, update and resolve
 issues that relate to a certain software package. It helps to keep track of
 issues, distribute assignments and priotitize work. We are aiming to report all
-issues on the [Github](www.github.com) issue tracking system.
+issues on the [Github](https://www.github.com/nismod) issue tracking system.
 
 ### Version Control
 Using a version control system provides benefits in many ways. Collaboration
@@ -70,7 +70,7 @@ becomes easier, as source code is shared in the cloud, multiple team members can
 simultanously work on the same project. Also by saving immediate versions of the
 source code, it provides us with the possibility to trace changes and restore to
 previous versions. We are aiming to host all projects on
-[Github](www.github.com).
+[Github](https://www.github.com/nismod).
 
 #### Commit Messages
 Good commit messages are necessary support the reviewing process, it helps to
@@ -79,7 +79,10 @@ important input to the release notes, to communicate what has been changed in a
 certain software revision.
 
 * Write a brief summary of the change in the subject line
-* Explain in the body, what has been changed and why this was necessary
+* Capitalise the subject line
+* Use the imperative mood in the subject line (like these bullet points - start
+  with a verb).
+* Explain in the body what has been changed and why this was necessary
 
 #### Size of Commits
 
@@ -122,8 +125,8 @@ Github](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2).
 
 
 Python:
-* Style: [Docstrings](www.python.org/dev/peps/pep-0257/)
-* Generator: [Sphinx](www.sphinx-doc.org)
+* Style: [Docstrings](https://www.python.org/dev/peps/pep-0257/)
+* Generator: [Sphinx](http://www.sphinx-doc.org)
 * Numpy Extension: [Numpydoc](http://pypi.python.org/pypi/numpydoc?)
 * Host: [Readthedocs](http://readthedocs.org)
 
@@ -145,14 +148,14 @@ requirements. ### Unit testing
 ### Integration testing
 
 Python 3:
-* [Pytest](www.pytest.org)
+* [Pytest](https://docs.pytest.org/en/latest/)
 
 Java:
 
 ### Deployment
 
 Public projects:
-* [Travis-CI](www.travis-ci.com)
+* [Travis-CI](https://www.travis-ci.org)
 
 Private projects: ?
 
@@ -162,7 +165,7 @@ The development stack refers to the preferred set of applications, tools and
 libraries that we use throughout the development team.
 
 ### Environment
-All: [Vagrant](www.vagrantup.com)
+All: [Vagrant](https://www.vagrantup.com)
 
 ### Coding
 Python:
