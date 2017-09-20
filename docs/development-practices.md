@@ -1,10 +1,13 @@
 ---
 title: Development practices
-layout: default
+layout: page
 ---
 
-# Software development practices
-This page offers a brief overview of software development practices, which are intended to define a standard way of working within the ITRC Mistral project. The goals of these standard practices are to facilitate collaboration, achieve a high quality of product and to support future developers and users throughout the life cycle of NISMOD-2.
+This page offers a brief overview of software development practices,
+which are intended to define a standard way of working within the ITRC Mistral
+project. The goals of these standard practices are to facilitate collaboration,
+achieve a high quality of product and to support future developers and users
+throughout the life cycle of NISMOD-2.
 
 Please feel free to make any changes or additions to this document, but discuss deviations from the standard way of working with members of the team.
 

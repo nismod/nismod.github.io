@@ -1,9 +1,7 @@
 ---
 title: Smif prerequisites
-layout: default
+layout: page
 ---
-
-# Smif Prerequisites
 
 * TOC
 {:toc}
