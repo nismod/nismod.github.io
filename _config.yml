@@ -34,8 +34,6 @@ exclude:
 collections:
   presentations:
     output: true
-  references:
-    output: true
 
 defaults:
   - scope:
@@ -43,8 +41,3 @@ defaults:
       type: presentations
     values:
       layout: presentation
-  - scope:
-      path: ""
-      type: references
-    values:
-      layout: reference
