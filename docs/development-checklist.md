@@ -86,17 +86,27 @@ certain software revision.
 
 ### No large or sensitive files are committed (in current state or in history)
 
+Generally, only source code should be kept under version control.
+
 Not all files are necessary to keep under version control, such as binaries and
 model run results. There are also files which strictly should not be uploaded to
 a (public) repository, such as licensed datasets or database configurations.
+
 Make sure that software changes are 'staged' carefully before executing a commit
 command. Add a *.gitignore* file to your Github repository to automatically
-ignore certain folders or file extentions.
-[Example](https://github.com/nismod/smif/blob/master/.gitignore)
+ignore certain folders or file extentions. For [example](https://github.com/nismod/smif/blob/master/.gitignore).
 
 ### The project is publicly available under suitable license
 
-There are various online [guides to choosing a license](https://choosealicense.com)
+Licenses clearly communicate what can and cannot be done with your code.
+We encourage you to choose a permissive licenses which doesn't impose unneccessary
+restrictions on potential users of your code. For example, the MIT license gives
+permission to any user that they may use, modify and incorporate the code in
+their own work, but that they must give credit by including the license. A more
+restrictive license such as GPL effectively disallows commercial use of the code
+by requiring that all software which uses the code to also be publicly released.
+
+There are various online [guides to choosing a license](https://choosealicense.com).
 
 ### If collaborating extensively, features and fixes are developed on branches
 
@@ -104,6 +114,11 @@ Work in branches rather than pushing commits directly in the master
 branch. By convention, start the name of a branch with:
 - `feature/<feature_description>` for new features
 - `bug/<bug_description>` for bug fixes
+
+In git, create a new branch with the command 
+`git branch feature/<feature_description>` and then move to the branch with the
+checkout command `git checkout feature/<feature_description>`.  Alternatively,
+do both in one command with `git checkout -b feature/<feature_description>`.
 
 ## Are there tests?
 
@@ -126,9 +141,22 @@ Continuous integration service:
 
 ## Is the code well written?
 
+Remember, code is read (like a book) more times that it is written. By using
+sensible and meaningful names for variables, methods and classes you can ensure
+that the code is readable.
+
 ### Any references to specific file locations are in config files or arguments
 
+The hard coding of file names makes it difficult to deploy your code to another
+computer.  Best practice is to direct your code to the location of the files
+by passing in the file path as an argument, or listing the files in a configuration
+file.
+
 ### The code is structured into functions or classes and methods
+
+Functions allow you to reduce duplication of code - a key maxim of good
+software development is DRY: don't repeat yourself. By keeping code in one place
+it is easier to maintain, understand and test.
 
 ### Names (of packages, modules, functions, methods) are clear
 
@@ -154,4 +182,4 @@ automatic code quality checker can help to automatically check programming code
 for deviations from the defined standard. We recommend to use the following
 tools.
 
-* Python: [pylint](https://www.pylint.org) and [flake8](http://flake8.pycqa.org/en/latest/)
+* Python: [pylint](https://www.pylint.org) and [flake8](http://flake8.pycqa.org/en/latest/).  [autopep8](https://pypi.python.org/pypi/autopep8) allows you to automatically apply the PEP8 style to existing code with the command `autopep8 -i my_file.py`
