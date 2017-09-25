@@ -17,7 +17,7 @@ Developing software in a team can be challenging, especially when members are wo
 
 ### We're keeping in touch productively
 
-Every Monday morning we hold a stand-up meeting, where each team member can review the last week's progress, the current week's goals, and any issues which are blocking further progress. The meeting is intended to be short and to-the-point, the goal is to share progress and to ensure that issues are raised and discussed within the group. Notes are shared in the #general [slack channel](https://nismod.slack.com/).
+Every Monday morning we hold a *stand-up* meeting, where each team member can review the last week's progress, the current week's goals, and any issues which are blocking further progress. The meeting is intended to be short and to-the-point, the goal is to share progress and to ensure that issues are raised and discussed within the group. Notes are shared in the #general [slack channel](https://nismod.slack.com/).
 
 ### The project's features and bugs are kept in an issue tracker
 
@@ -25,9 +25,19 @@ An issue tracker is a system that is intended to create, update and resolve issu
 
 ## Is the project well documented?
 
+Writing software documentation is necessary to preserve the valuable information that is usually kept in the head of developers. Well documented software is more likely to be reused, extends the lifetime of software code and helps developers in all life-cycle stages of a product.
+
+remember later
+
+software useless
+reusabality
+
+knowledge transfer
+help new users learn quickly
+
 ### There is a README in the project root
 
-A good README is a short project introduction which might include:
+A readme is typically the first page read by anyone who is interested in a using or contributing to a coding project. This page acts as a brief overview of the project which includes topics like:
 
 * General description of the project
 * Installation instructions
@@ -38,6 +48,17 @@ A good README is a short project introduction which might include:
 A template for a `README.md` can be found [on Github](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2).
 
 ### There is module- function- and/or method- level documentation
+
+A detailed-level of documentation should provide a deeping understanding of the structure and subfunctions of a coding project. This information is useful to fresh up the knowledge of the original developer, and is essential to anyone new to the project.
+
+A few lines of documentation can already make a big difference in gaining an understanding how certain pieces of software works, without having to reverse-engineer each line of code. Therefore we aim to at least have every module- function and/or method, describing the following information in the code comments.
+
+* One-line summary of the method/function
+* Detailed description of method/function
+* List of arguments with pre-conditions
+* List of return values with post-conditions
+
+There are tools available that can use this information to automatically generate document, such as.
 
 * Python [Docstrings](https://www.python.org/dev/peps/pep-0257/)
 
@@ -52,13 +73,11 @@ Python:
 
 ## Is the project in version control?
 
-Using a version control system provides benefits in many ways. Collaboration
-becomes easier, as source code is shared in the cloud, multiple team members can simultanously work on the same project. Also by saving immediate versions of the source code, it provides us with the possibility to trace changes and restore to previous versions.
+Using a version control system provides benefits in many ways. Collaboration becomes easier, as source code is shared in the cloud, multiple team members can simultanously work on the same project. Also by saving immediate versions of the source code, it provides us with the possibility to trace changes and restore to previous versions.
 
 ### The current state of the code is accessible to ITRC/nismod developers
 
-We are aiming to host all projects on
-[github.com/nismod](https://www.github.com/nismod).
+We are aiming to host all projects on [github.com/nismod](https://www.github.com/nismod), to ensure the availability of the latest code base to all ITRC/nismod developers.
 
 ### There is a history of fairly small, frequent commits with clear messages
 
@@ -71,8 +90,7 @@ Good commit messages are necessary support the reviewing process, it helps to un
 
 ### No large or sensitive files are committed (in current state or in history)
 
-Generally, only source code should be kept under version control. Not all files are necessary to keep under version control, such as binaries and
-model run results. There are also files which strictly should not be uploaded to a (public) repository, such as licensed datasets or database configurations.
+Generally, only source code should be kept under version control. Not all files are necessary to keep under version control, such as binaries and model run results. There are also files which strictly should not be uploaded to a (public) repository, such as licensed datasets or database configurations.
 
 Make sure that software changes are 'staged' carefully before executing a commit command. Add a *.gitignore* file to your Github repository to automatically ignore certain folders or file extentions. For [example](https://github.com/nismod/smif/blob/master/.gitignore).
 
