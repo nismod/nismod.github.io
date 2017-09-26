@@ -1,0 +1,9 @@
+<ul class="post-list">
+{% for presentation in site.presentations %}
+  <li>
+    <h3>
+      <a href="{{ presentation.url | relative_url }}">{{ presentation.title | escape }}</a>
+    </h3>
+  </li>
+{% endfor %}
+</ul>

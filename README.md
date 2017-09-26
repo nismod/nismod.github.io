@@ -13,5 +13,19 @@ This repository is processed by [Github Pages](https://pages.github.com/)
 to produce the site at [https://nismod.github.io/](https://nismod.github.io/)
 using the [Jekyll](https://jekyllrb.com/) static site generator.
 
-Top level files - `index.md` and `about.md` correspond to the home page and
-about page on the site.
+### Top level files
+
+The `index.md` file corresponds to the home page of the site. Other markdown
+files at the top level will be processed into pages on the site.
+
+### Reference guides
+
+Add a markdown file (`something.md`) to the `docs` directory to include a page
+in the list of reference guides. These should use `layout: page` for default
+styling.
+
+### Presentations
+
+Add a html file (`something-else.html`) to the `_presentations` directory with
+content in markdown format to create a [`remark.js`](https://remarkjs.com/)
+presentation.
