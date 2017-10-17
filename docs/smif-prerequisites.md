@@ -25,6 +25,7 @@ This document is intended for the following users:
 
 You collate, summarise and process raw data to produce scenarios of future change, e.g. population, demographics and economic growth.
 
+Please follow these guidelines:
 1. [Scenarios](./smif-prerequisites.html#scenarios)
 2. [Metadata](./smif-prerequisites.html#metadata)
 
@@ -32,6 +33,7 @@ You collate, summarise and process raw data to produce scenarios of future chang
 
 You develop and implement a simulation model of an infrastructure system.
 
+Please follow these guidelines:
 1. [Sector Model config](./smif-prerequisites.html#configuration-sector-model)
 2. [Interventions](./smif-prerequisites.html#interventions)
 3. [Initial Conditions](./smif-prerequisites.html#initial-conditions)
@@ -41,6 +43,7 @@ You develop and implement a simulation model of an infrastructure system.
 
 You use a system-of-systems model to analyse the evolution of coupled infrastructure systems, interdependencies under different scenarios
 
+Please follow these guidelines:
 1. [Narratives](./smif-prerequisites.html#narratives)
 
 ## Packaging and Deployment
@@ -94,14 +97,19 @@ the smif framework:
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
-| name | string | `population_density` ||
-| spatial_resolution | string | `lad` ||
-| temporal_resolution | string | `annual` ||
-| units | string | `people/km^2`||
+| name | string | `population_density` | Unique to inputs or outputs |
+| spatial_resolution | string | `lad` | Reference to the name of a region definition |
+| temporal_resolution | string | `annual` | Reference to the name of an interval definition |
+| units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
 
 The dependency upon another data source are explicitly declared in the integration framework. To declare a dependency, both models must have the requisite inputs and outputs defined.
+For example, if you wish to couple your energy demand model with a energy supply, you will need to define outputs for `electricity demand`, `natural gas demand`, `hydrogen demand` and so on.  The energy supply model would then need to define inputs for `electricity`, `natural gas` and `hydrogen`. 
+Note that the names should be unique within a sector model and list of inputs and outputs.
+It is helpful if the names are easy to understand or descriptive.
 
 ### Parameters
+
+Parameters are 
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -118,9 +126,13 @@ The dependency upon another data source are explicitly declared in the integrati
 
 ### Metadata
 
-Anytime that data is specified, an interval and region definition file must be associated with the data. This allows `smif` to perform spatio-temporal conversion operations on the data between models.
+Anytime that data is specified, a reference to an interval, region (and units) definition file must be associated with the data. This allows `smif` to perform spatio-temporal conversion operations on the data between models.
+
+The region and interval definition files allow users to specify the way in which space and time are divided in their data inputs and outputs.
 
 #### Intervals
+
+An interval definition specifies how the time within a year (8760 hours) is divided into discrete intervals.
 
 An example interval definition csv file::
 
@@ -131,9 +143,47 @@ id,start_hour,end_hour
 
 In the above example, id `1` is associated with the start hour 0 and end hour 8760 - representing the entire year. The ISO8601 standard is used to define hourly intervals.
 
+This interval id is used in data files to associate a data row with an interval.
+
+In addition, interval definitions are loaded with the following attributes:
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `annual` | A unique name for the region definition at project level |
+| description | string | `One year-long interval` | |
+| filename | string | `annual.csv` | |
+
 #### Regions
 
+Regions can be contained within a shape file or geojson formats, anything which can be opened by `smif`. A `name` field should exist in the region file and uniquely identify each region. 
+
+![](../fig/maup-lad.png)
+
+This region `name` is then used in data files to associate a data row with an area.
+
+The values for `name` should be unique within the file. Each shape should be either a polygon or multipolygon. If a single region has disjoint parts, it should be stored as a multipolygon.
+
+Note that all region definitions within a project should typically refer to the same total area. For example, the union of all the region shapes should correspond to the same outline of the UK, within a UK project.
+
+In addition, region definitions are loaded with the following attributes:
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `lad` | A unique name for the region definition at project level |
+| description | string | `Local authority districts for the UK` | |
+| filename | string | `lad.shp` | |
+
 #### Units
+
+All SI unit definitions are supported by `smif` (although as of v0.5, conversion between units is not yet implemented) and are parsed into a normalised form. For example `MWh` becomes mega-Watt-hour.
+
+In future versions of `smif`, a unit definition file will allow the specification of conversion functions across units.  `smif` uses a Python package [Pint](http://pint.readthedocs.io/en/latest/index.html) to manage units.
+
+Units are defined in the following way:
+```
+hour = 60 * minute = h = hr
+minute = 60 * second = min
+```
 
 ### Interventions
 
