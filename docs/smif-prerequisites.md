@@ -1,5 +1,5 @@
 ---
-title: Smif prerequisites
+title: Integration checklist
 layout: page
 ---
 
@@ -32,18 +32,18 @@ You collate, summarise and process raw data to produce scenarios of
 future change, e.g. population, demographics and economic growth.
 
 Please follow these guidelines:
-1. [Scenarios](./smif-prerequisites.html#scenarios)
-2. [Metadata](./smif-prerequisites.html#metadata)
+1. [Metadata](./smif-prerequisites.html#metadata)
+2. [Scenarios](./smif-prerequisites.html#scenarios)
 
 ### Sector Modeller
 
 You develop and implement a simulation model of an infrastructure system.
 
 Please follow these guidelines:
+1. [Metadata](./smif-prerequisites.html#metadata)
 1. [Sector Model config](./smif-prerequisites.html#configuration-sector-model)
 2. [Interventions](./smif-prerequisites.html#interventions)
 3. [Initial Conditions](./smif-prerequisites.html#initial-conditions)
-4. [Metadata](./smif-prerequisites.html#metadata)
 
 ### System Modeller
 
@@ -103,6 +103,13 @@ the smif framework:
 `smif` requires all model inputs and outputs to be explicitly defined
 so that data can be passed to and retrieved from a model at runtime.
 
+Wherever you have a data passed into your model from another source, you should
+define an input.
+For each of the results you model produces, you need to define an output.
+For example, a digital communications model may require `population` data as an
+input, and produce a `service quality` metric and 
+an `fibre-optic repeater electricity demand` as an output
+
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
 | name | string | `population_density` | Unique to inputs or outputs |
@@ -146,6 +153,9 @@ but future versions will support categorical and boolean parameters.
 ### Initial Conditions
 
 ### Metadata
+
+This section is for [modellers](./smif-prerequisites.html#sector-modeller) 
+and [data providers](./smif-prerequisites.html#data-provider).
 
 Anytime that data is specified, a reference to an interval, region (and units)
 definition file must be associated with the data.
@@ -271,13 +281,15 @@ energy_demand:
 
 This section is for [data providers](./smif-prerequisites.html#data-provider).
 
-An example scenarios file which shows the change in population
+Below is an example scenarios file which shows the change in population
 for three regions, England, Scotland and Wales for the years
 2010, 2015 and 2020.
-The polygons associated with the regions are stored in the region definitions
+The polygons associated with the regions are stored in a region definitions
 file.
-The duration associated with the interval 1 are stored
+The duration associated with the interval `1` are stored
 in the interval definitions file.
+See the [metadata](./smif-prerequisites.html#metadata) section for details on
+how to define region and interval definitions if you have not already done so.
 
 ```
 timestep,region,interval,value
