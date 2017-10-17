@@ -8,12 +8,17 @@ layout: page
 
 ## Introduction
 
-The aim of this microsite is to provide advice and guidance for how to prepare your model for the simulation modelling integration framework, [smif](https://github.com/nismod/smif).
-This page focusses on practical guidance to help you draw together the various bits and pieces of data, information and configuration you will need.
+The aim of this microsite is to provide advice and guidance for how to
+prepare your model for the simulation modelling integration framework,
+[smif](https://github.com/nismod/smif).
+This page focusses on practical guidance to help you draw together
+the various bits and pieces of data, information and configuration you will need.
 
-For technical details on how to use `smif`, please read the [documentation](http://smif.readthedocs.io/en/latest/) for the package.
+For technical details on how to use `smif`, please read
+the [documentation](http://smif.readthedocs.io/en/latest/) for the package.
 
-If you have any questions, comments or suggestions please direct them via e-mail or Slack to the Oxford integration team.
+If you have any questions, comments or suggestions please direct them via
+e-mail or Slack to the Oxford integration team.
 
 A data template is available to [download](../files/integration_template.xlsx).
 
@@ -23,7 +28,8 @@ This document is intended for the following users:
 
 ### Data Provider
 
-You collate, summarise and process raw data to produce scenarios of future change, e.g. population, demographics and economic growth.
+You collate, summarise and process raw data to produce scenarios of
+future change, e.g. population, demographics and economic growth.
 
 Please follow these guidelines:
 1. [Scenarios](./smif-prerequisites.html#scenarios)
@@ -41,7 +47,8 @@ Please follow these guidelines:
 
 ### System Modeller
 
-You use a system-of-systems model to analyse the evolution of coupled infrastructure systems, interdependencies under different scenarios
+You use a system-of-systems model to analyse the evolution of coupled
+infrastructure systems, interdependencies under different scenarios
 
 Please follow these guidelines:
 1. [Narratives](./smif-prerequisites.html#narratives)
@@ -93,7 +100,8 @@ the smif framework:
 
 ### Inputs and Outputs
 
-`smif` requires all model inputs and outputs to be explicitly defined so that data can be passed to and retrieved from a model at runtime.
+`smif` requires all model inputs and outputs to be explicitly defined
+so that data can be passed to and retrieved from a model at runtime.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -102,22 +110,35 @@ the smif framework:
 | temporal_resolution | string | `annual` | Reference to the name of an interval definition |
 | units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
 
-The dependency upon another data source are explicitly declared in the integration framework. To declare a dependency, both models must have the requisite inputs and outputs defined.
-For example, if you wish to couple your energy demand model with a energy supply, you will need to define outputs for `electricity demand`, `natural gas demand`, `hydrogen demand` and so on.  The energy supply model would then need to define inputs for `electricity`, `natural gas` and `hydrogen`. 
-Note that the names should be unique within a sector model and list of inputs and outputs.
+The dependency upon another data source are explicitly declared in the
+integration framework.
+To declare a dependency, both models must have the requisite inputs
+and outputs defined.
+For example, if you wish to couple your energy demand model
+with an energy supply model, you will need to define outputs
+for `electricity demand`, `natural gas demand`, `hydrogen demand` and so on.
+The energy supply model would then need to define inputs for `electricity`,
+`natural gas` and `hydrogen`.
+Note that the names should be unique within a sector model and list of
+inputs and outputs.
 It is helpful if the names are easy to understand or descriptive.
 
 ### Parameters
 
-Parameters are 
+Parameters are the means by which the 'dials and knobs' of a model can be made
+visible to `smif`. Once defined, parameters can be modified using narratives,
+and included in the smif GUI.
+
+Initially, (as of `smif v0.5`) only floating point parameters are supported,
+but future versions will support categorical and boolean parameters.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
 | name | string | `assump_diff_floorarea_pp`| |
 | description | string | `Difference in floor area per person in end year compared to base year` | |
-| absolute_range | string | (0.5, 2) | |
-| suggested_range | string | (0.5, 2) | |
-| default_value | string | 1 | |
+| absolute_range | tuple | (0.5, 2) | |
+| suggested_range | tuple | (0.5, 2) | |
+| default_value | float | 1 | |
 | units | string | `percentage` | |
 
 ## Data Requirements
@@ -126,13 +147,18 @@ Parameters are
 
 ### Metadata
 
-Anytime that data is specified, a reference to an interval, region (and units) definition file must be associated with the data. This allows `smif` to perform spatio-temporal conversion operations on the data between models.
+Anytime that data is specified, a reference to an interval, region (and units)
+definition file must be associated with the data.
+This allows `smif` to perform spatio-temporal conversion operations
+on the data between models.
 
-The region and interval definition files allow users to specify the way in which space and time are divided in their data inputs and outputs.
+The region and interval definition files allow users to specify the way
+in which space and time are divided in their data inputs and outputs.
 
 #### Intervals
 
-An interval definition specifies how the time within a year (8760 hours) is divided into discrete intervals.
+An interval definition specifies how the time within a year (8760 hours)
+is divided into discrete intervals.
 
 An example interval definition csv file::
 
@@ -141,7 +167,9 @@ id,start_hour,end_hour
 1,PT0H,PT8760H
 ```
 
-In the above example, id `1` is associated with the start hour 0 and end hour 8760 - representing the entire year. The ISO8601 standard is used to define hourly intervals.
+In the above example, id `1` is associated with the start hour 0 and
+end hour 8760 - representing the entire year.
+The ISO8601 standard is used to define hourly intervals.
 
 This interval id is used in data files to associate a data row with an interval.
 
@@ -155,15 +183,22 @@ In addition, interval definitions are loaded with the following attributes:
 
 #### Regions
 
-Regions can be contained within a shape file or geojson formats, anything which can be opened by `smif`. A `name` field should exist in the region file and uniquely identify each region. 
+Regions can be contained within a shape file or geojson formats,
+anything which can be opened by `smif`.
+A `name` field should exist in the region file and uniquely identify each region.
 
 ![](../fig/maup-lad.png)
 
 This region `name` is then used in data files to associate a data row with an area.
 
-The values for `name` should be unique within the file. Each shape should be either a polygon or multipolygon. If a single region has disjoint parts, it should be stored as a multipolygon.
+The values for `name` should be unique within the file.
+Each shape should be either a polygon or multipolygon.
+If a single region has disjoint parts, it should be stored as a multipolygon.
 
-Note that all region definitions within a project should typically refer to the same total area. For example, the union of all the region shapes should correspond to the same outline of the UK, within a UK project.
+Note that all region definitions within a project should typically refer
+to the same total area.
+For example, the union of all the region shapes should correspond
+to the same outline of the UK, within a UK project.
 
 In addition, region definitions are loaded with the following attributes:
 
@@ -175,11 +210,16 @@ In addition, region definitions are loaded with the following attributes:
 
 #### Units
 
-All SI unit definitions are supported by `smif` (although as of v0.5, conversion between units is not yet implemented) and are parsed into a normalised form. For example `MWh` becomes mega-Watt-hour.
+All SI unit definitions are supported by `smif` (although as of v0.5,
+conversion between units is not yet implemented) and are parsed
+into a normalised form. For example `MWh` becomes `megawatt_hour`.
 
-In future versions of `smif`, a unit definition file will allow the specification of conversion functions across units.  `smif` uses a Python package [Pint](http://pint.readthedocs.io/en/latest/index.html) to manage units.
+In future versions of `smif`, a unit definition file will
+allow the specification of conversion functions across units.
+`smif` uses a Python package [Pint](http://pint.readthedocs.io/en/latest/index.html) to manage units.
 
-Units are defined in the following way:
+Using Pint, new units and relations between units can be defined
+in the following way:
 ```
 hour = 60 * minute = h = hr
 minute = 60 * second = min
@@ -187,23 +227,38 @@ minute = 60 * second = min
 
 ### Interventions
 
-A yml file,
+Interventions represent the lowest level targets of decisions within an
+infrastructure simulation model.
+
+To enable the decision module of `smif`, interventions must be defined for each
+of the simulation models within a system-of-systems model.
+
+Once defined, these interventions can be exposed to various pieces of functionality
+within `smif`, including defining strategies and exploring decision space across
+infrastructure system-of-systems.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
-| name | string | `nuclear_power_station` ||
-| capital_cost_value | float | `20.3` ||
-| capital_cost_unit | string | `£B/GW` |
-| economic_lifetime | integer | `20` ||
-| operational_lifetime | integer | `25` ||
-| capacity_value | float | `1000` ||
-| capacity_unit | string | `MW` || 
-| location | string | `Oxford` ||
-| start_year | integer | `2018` ||
+| name* | string | `nuclear_large_oxford` | Unique within a sector model |
+| capital_cost_value* | float | `20.3` ||
+| capital_cost_unit* | string | `£B` |
+| economic_lifetime* | integer | `20` | The duration over which the capital cost is ammortized|
+| operational_lifetime | integer | `25` | The duration during which the intervention is active |
+| location* | string | `Oxford` | |
+| capacity_value | float | `1000` | Example of a custom attribute |
+| capacity_unit | string | `MW` | Example of a custom attribute |
+| start_year | integer | `2018` | Example of a custom attribute |
+
+*required information
 
 ### Narratives
 
-An example narratives file::
+Narratives are the means by which packages of assumptions can be included in a
+model run. Narratives cut across model parameters, simulation models,
+and strategies, enabling complex combinations of user-defined functionality to
+be included in a model run.
+
+An example narratives file:
 
 ```
 global:
@@ -216,9 +271,13 @@ energy_demand:
 
 This section is for [data providers](./smif-prerequisites.html#data-provider).
 
-An example scenarios file which shows the change in population for three regions, England, Scotland and Wales for the years 2010, 2015 and 2020.
-The polygons associated with the regions are stored in the region definitions file.
-The duration associated with the interval 1 are stored in the interval definitions file.
+An example scenarios file which shows the change in population
+for three regions, England, Scotland and Wales for the years
+2010, 2015 and 2020.
+The polygons associated with the regions are stored in the region definitions
+file.
+The duration associated with the interval 1 are stored
+in the interval definitions file.
 
 ```
 timestep,region,interval,value
@@ -235,13 +294,20 @@ timestep,region,interval,value
 
 The entries in the `timestep` column should be a valid year integer.
 
-The entries in the `region` column should refer to the names of the regions in the associated [region definition file](./smif-prerequisites.html#regions).
+The entries in the `region` column should refer to the names of the regions
+in the associated [region definition file](./smif-prerequisites.html#regions).
 
-The entries in the `interval` column should refer to the id of the intervals in the associated [interval definition file](./smif-prerequisites.html#intervals).
+The entries in the `interval` column should refer to the id of the intervals in
+the associated [interval definition file](./smif-prerequisites.html#intervals).
 
 The entries in the `value` column will normally be a floating point number.
 
-The metadata required to define a particular scenario are shown in the table below. It is possible to associate a number of different data sets with the same scenario, so that, for example, choosing the `High Population` scenario allows users to access both population count and density data in the same or different spatial and temporal resolutions.
+The metadata required to define a particular scenario are shown in the table
+below.
+It is possible to associate a number of different data sets with
+the same scenario, so that, for example, choosing the `High Population`
+scenario allows users to access both population count and density data
+in the same or different spatial and temporal resolutions.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -250,7 +316,8 @@ The metadata required to define a particular scenario are shown in the table bel
 | scenario_set | string | `population` | |
 | parameters | list | \<see below\> | |
 
-For each entry in the scenario parameters list, the following metadata is required:
+For each entry in the scenario parameters list, the following metadata
+is required:
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
