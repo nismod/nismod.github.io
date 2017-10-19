@@ -83,7 +83,8 @@ This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 
 These files hold a list of interventions for which the build date is before the
 start year of the model time horizon. 
-This enables `smif` to construct the initial systems in the simulation models.
+This enables `smif` to construct the initial systems in the simulation models
+and users to view, visualise and edit the initial systems in the smif GUI.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -95,7 +96,8 @@ This enables `smif` to construct the initial systems in the simulation models.
 This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 
 This data holds initialisation values of parameters which are otherwise 
-dynamically determined by the model (elsewhere called 'state').
+dynamically determined by the model (also called 'state').
+
 For example, the level of a reservoir in a water supply model may be passed
 between planning years (an example of inter-seasonal or inter-year storage).
 The initial value of the reservoir level can be set in this dataset.
