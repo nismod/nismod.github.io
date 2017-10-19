@@ -74,80 +74,6 @@ python_codesnippet = here
 
 ### Output
 
-## Configuration: Sector Model
-
-The following configuration data is required to integrate a sector model within
-the smif framework:
-
-* model name
-* path to the wrapper
-* name of the wrapper class
-* inputs
-* outputs
-* parameters
-* interventions
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| model name | string | `energy_demand` | A unique name
-| path | string | `../../models/energy_demand/run.py` | Relative to the project folder |
-| classname | string | `EnergyDemandWrapper` | Name of the python class in the wrapper file |
-| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
-| outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
-| parameters | list | [see below](./smif-prerequisites.html#parameters) | |
-| interventions | string | `energy_demand.yml` | Name of the interventions file in the `project/data/interventions` folder |
-| initial conditions | string | `energy_demand_existing.yml` | Name of the file in the `project/data/initial_conditions` folder |
-
-### Inputs and Outputs
-
-`smif` requires all model inputs and outputs to be explicitly defined
-so that data can be passed to and retrieved from a model at runtime.
-
-Wherever you have a data passed into your model from another source, you should
-define an input.
-For each of the results you model produces, you need to define an output.
-For example, a digital communications model may require `population` data as an
-input, and produce a `service quality` metric and 
-an `fibre-optic repeater electricity demand` as an output
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `population_density` | Unique to inputs or outputs |
-| spatial_resolution | string | `lad` | Reference to the name of a region definition |
-| temporal_resolution | string | `annual` | Reference to the name of an interval definition |
-| units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
-
-The dependency upon another data source are explicitly declared in the
-integration framework.
-To declare a dependency, both models must have the requisite inputs
-and outputs defined.
-For example, if you wish to couple your energy demand model
-with an energy supply model, you will need to define outputs
-for `electricity demand`, `natural gas demand`, `hydrogen demand` and so on.
-The energy supply model would then need to define inputs for `electricity`,
-`natural gas` and `hydrogen`.
-Note that the names should be unique within a sector model and list of
-inputs and outputs.
-It is helpful if the names are easy to understand or descriptive.
-
-### Parameters
-
-Parameters are the means by which the 'dials and knobs' of a model can be made
-visible to `smif`. Once defined, parameters can be modified through the smif GUI
-or connected to narratives.
-
-Initially, (as of `smif v0.5`) only floating point parameters are supported,
-but future versions will support categorical and boolean parameters.
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `assump_diff_floorarea_pp`| |
-| description | string | `Difference in floor area per person in end year compared to base year` | |
-| absolute_range | tuple | (0.5, 2) | |
-| suggested_range | tuple | (0.5, 2) | |
-| default_value | float | 1 | |
-| units | string | `percentage` | |
-
 ## Data Requirements
 
 ### Initial Conditions
@@ -338,4 +264,79 @@ is required:
 | temporal_resolution |string | `annual` ||
 | units | string | `people/km^2` ||
 | filename | string | `population_density_high.csv` ||
+
+
+## Configuration: Sector Model
+
+The following configuration data is required to integrate a sector model within
+the smif framework:
+
+* model name
+* path to the wrapper
+* name of the wrapper class
+* inputs
+* outputs
+* parameters
+* interventions
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| model name | string | `energy_demand` | A unique name
+| path | string | `../../models/energy_demand/run.py` | Relative to the project folder |
+| classname | string | `EnergyDemandWrapper` | Name of the python class in the wrapper file |
+| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
+| outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
+| parameters | list | [see below](./smif-prerequisites.html#parameters) | |
+| interventions | string | `energy_demand.yml` | Name of the interventions file in the `project/data/interventions` folder |
+| initial conditions | string | `energy_demand_existing.yml` | Name of the file in the `project/data/initial_conditions` folder |
+
+### Inputs and Outputs
+
+`smif` requires all model inputs and outputs to be explicitly defined
+so that data can be passed to and retrieved from a model at runtime.
+
+Wherever you have a data passed into your model from another source, you should
+define an input.
+For each of the results you model produces, you need to define an output.
+For example, a digital communications model may require `population` data as an
+input, and produce a `service quality` metric and 
+an `fibre-optic repeater electricity demand` as an output
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `population_density` | Unique to inputs or outputs |
+| spatial_resolution | string | `lad` | Reference to the name of a region definition |
+| temporal_resolution | string | `annual` | Reference to the name of an interval definition |
+| units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
+
+The dependency upon another data source are explicitly declared in the
+integration framework.
+To declare a dependency, both models must have the requisite inputs
+and outputs defined.
+For example, if you wish to couple your energy demand model
+with an energy supply model, you will need to define outputs
+for `electricity demand`, `natural gas demand`, `hydrogen demand` and so on.
+The energy supply model would then need to define inputs for `electricity`,
+`natural gas` and `hydrogen`.
+Note that the names should be unique within a sector model and list of
+inputs and outputs.
+It is helpful if the names are easy to understand or descriptive.
+
+### Parameters
+
+Parameters are the means by which the 'dials and knobs' of a model can be made
+visible to `smif`. Once defined, parameters can be modified through the smif GUI
+or connected to narratives.
+
+Initially, (as of `smif v0.5`) only floating point parameters are supported,
+but future versions will support categorical and boolean parameters.
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `assump_diff_floorarea_pp`| |
+| description | string | `Difference in floor area per person in end year compared to base year` | |
+| absolute_range | tuple | (0.5, 2) | |
+| suggested_range | tuple | (0.5, 2) | |
+| default_value | float | 1 | |
+| units | string | `percentage` | |
 
