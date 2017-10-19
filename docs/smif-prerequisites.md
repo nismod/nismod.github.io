@@ -299,10 +299,10 @@ so that data can be passed to and retrieved from a model at runtime.
 
 Wherever you have a data passed into your model from another source, you should
 define an input.
-For each of the results you model produces, you need to define an output.
+For each of the results your model produces, you need to define an output.
 For example, a digital communications model may require `population` data as an
 input, and produce a `service quality` metric and 
-an `fibre-optic repeater electricity demand` as an output
+a `fibre-optic repeater electricity demand` as an output
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
