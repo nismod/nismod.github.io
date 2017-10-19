@@ -44,6 +44,7 @@ Please follow these guidelines:
 1. [Sector Model config](./smif-prerequisites.html#configuration-sector-model)
 2. [Interventions](./smif-prerequisites.html#interventions)
 3. [Initial Conditions](./smif-prerequisites.html#initial-conditions)
+5. [Initial System](./smif-prerequisites.html#initial-system)
 
 ### System Modeller
 
@@ -82,7 +83,10 @@ These files hold a list of interventions for which the build date is before the
 start year of the model time horizon. 
 This enables `smif` to construct the initial systems in the simulation models.
 
-
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| intervention name | string | `sizewell_b` | Reference to the intervention name defined in the interventions file |
+| build_year | integer | `1995` | The year in which the historical intervention was comissioned |
 
 ### Initial Conditions
 
@@ -91,6 +95,11 @@ dynamically determined by the model (elsewhere called 'state').
 For example, the level of a reservoir in a water supply model may be passed
 between planning years (an example of inter-seasonal or inter-year storage).
 The initial value of the reservoir level can be set in this dataset.
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| parameter name | string | `reservoir_level` | Reference to the parameter name defined in the sector model parameters |
+| initial value | float | `30294919.123`| The initial value of the paramter |
 
 ### Metadata
 
