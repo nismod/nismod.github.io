@@ -133,8 +133,8 @@ It is helpful if the names are easy to understand or descriptive.
 ### Parameters
 
 Parameters are the means by which the 'dials and knobs' of a model can be made
-visible to `smif`. Once defined, parameters can be modified using narratives,
-and included in the smif GUI.
+visible to `smif`. Once defined, parameters can be modified through the smif GUI
+or connected to narratives.
 
 Initially, (as of `smif v0.5`) only floating point parameters are supported,
 but future versions will support categorical and boolean parameters.
