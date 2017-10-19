@@ -79,6 +79,8 @@ python_codesnippet = here
 
 ### Initial System
 
+This section is for [modellers](./smif-prerequisites.html#sector-modeller).
+
 These files hold a list of interventions for which the build date is before the
 start year of the model time horizon. 
 This enables `smif` to construct the initial systems in the simulation models.
@@ -89,6 +91,8 @@ This enables `smif` to construct the initial systems in the simulation models.
 | build_year | integer | `1995` | The year in which the historical intervention was comissioned |
 
 ### Initial Conditions
+
+This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 
 This data holds initialisation values of parameters which are otherwise 
 dynamically determined by the model (elsewhere called 'state').
@@ -179,6 +183,8 @@ minute = 60 * second = min
 
 ### Interventions
 
+This section is for [modellers](./smif-prerequisites.html#sector-modeller).
+
 Interventions represent the lowest level targets of decisions within an
 infrastructure simulation model.
 
@@ -204,6 +210,8 @@ infrastructure system-of-systems.
 *required information
 
 ### Narratives
+
+This section is for [system modellers](./smif-prerequisites.html#system-modeller).
 
 Narratives are the means by which packages of assumptions can be included in a
 model run. Narratives cut across model parameters, simulation models,
@@ -254,6 +262,8 @@ timestep,region,interval,value
 | value | float | `52000000` | Will normally be a floating point number |
 
 ## Configuration: Sector Model
+
+This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 
 The following configuration data is required to integrate a sector model within
 the smif framework:
