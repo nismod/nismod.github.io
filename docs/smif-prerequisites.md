@@ -317,34 +317,3 @@ but future versions will support categorical and boolean parameters.
 | suggested_range | tuple | (0.5, 2) | |
 | default_value | float | 1 | |
 | units | string | `percentage` | |
-
-## Configuration: Project
-
-### Adding Scenarios
-
-The metadata required to define a particular scenario are shown in the table
-below.
-It is possible to associate a number of different data sets with
-the same scenario, so that, for example, choosing the `High Population`
-scenario allows users to access both population count and density data
-in the same or different spatial and temporal resolutions.
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `High Population (ONS)` | |
-| description | string | `The High ONS Forecast for UK population out to 2050` ||
-| scenario_set | string | `population` | |
-| parameters | list | [see below](./smif-prerequisites.html#scenario-parameters) | |
-
-#### Scenario Parameters
-
-For each entry in the scenario parameters list, the following metadata
-is required:
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `density` ||
-| spatial_resolution | string | `lad` ||
-| temporal_resolution |string | `annual` ||
-| units | string | `people/km^2` ||
-| filename | string | `population_density_high.csv` | Name of the file in the `project/data/scenarios` folder |
