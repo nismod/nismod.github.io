@@ -82,6 +82,8 @@ These files hold a list of interventions for which the build date is before the
 start year of the model time horizon. 
 This enables `smif` to construct the initial systems in the simulation models.
 
+
+
 ### Initial Conditions
 
 This data holds initialisation values of parameters which are otherwise 
@@ -316,7 +318,7 @@ but future versions will support categorical and boolean parameters.
 | default_value | float | 1 | |
 | units | string | `percentage` | |
 
-## Configuration : Project
+## Configuration: Project
 
 ### Adding Scenarios
 
