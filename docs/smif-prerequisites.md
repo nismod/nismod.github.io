@@ -92,9 +92,9 @@ the smif framework:
 | model name | string | `energy_demand` | A unique name
 | path | string | `../../models/energy_demand/run.py` | Relative to the project folder |
 | classname | string | `EnergyDemandWrapper` | Name of the python class in the wrapper file |
-| inputs | list | \<see below\> | |
-| outputs | list | \<see below\> | |
-| parameters | list | \<see below\> | |
+| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
+| outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
+| parameters | list | [see below](./smif-prerequisites.html#parameters) | |
 | interventions | string | `energy_demand.yml` | Name of the interventions file in the `project/data/interventions` folder |
 | initial conditions | string | `energy_demand_existing.yml` | Name of the file |
 
