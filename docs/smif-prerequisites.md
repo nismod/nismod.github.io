@@ -235,41 +235,12 @@ timestep,region,interval,value
 2020,Wales,1,3200000
 ```
 
-The entries in the `timestep` column should be a valid year integer.
-
-The entries in the `region` column should refer to the names of the regions
-in the associated [region definition file](./smif-prerequisites.html#regions).
-
-The entries in the `interval` column should refer to the id of the intervals in
-the associated [interval definition file](./smif-prerequisites.html#intervals).
-
-The entries in the `value` column will normally be a floating point number.
-
-The metadata required to define a particular scenario are shown in the table
-below.
-It is possible to associate a number of different data sets with
-the same scenario, so that, for example, choosing the `High Population`
-scenario allows users to access both population count and density data
-in the same or different spatial and temporal resolutions.
-
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
-| name | string | `High Population (ONS)` | |
-| description | string | `The High ONS Forecast for UK population out to 2050` ||
-| scenario_set | string | `population` | |
-| parameters | list | \<see below\> | |
-
-For each entry in the scenario parameters list, the following metadata
-is required:
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `density` ||
-| spatial_resolution | string | `lad` ||
-| temporal_resolution |string | `annual` ||
-| units | string | `people/km^2` ||
-| filename | string | `population_density_high.csv` ||
-
+| timestep | integer | `2010` | A valid year integer |
+| region | string | `England` | Reference to the names of the regions in the associated [region definition file](./smif-prerequisites.html#regions)|
+| interval | string | `1` | Reference to  the id of the intervals in the associated [interval definition file](./smif-prerequisites.html#intervals)|
+| value | float | `52000000` | Will normally be a floating point number |
 
 ## Configuration: Sector Model
 
@@ -345,3 +316,33 @@ but future versions will support categorical and boolean parameters.
 | default_value | float | 1 | |
 | units | string | `percentage` | |
 
+## Configuration : Project
+
+### Adding Scenarios
+
+The metadata required to define a particular scenario are shown in the table
+below.
+It is possible to associate a number of different data sets with
+the same scenario, so that, for example, choosing the `High Population`
+scenario allows users to access both population count and density data
+in the same or different spatial and temporal resolutions.
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `High Population (ONS)` | |
+| description | string | `The High ONS Forecast for UK population out to 2050` ||
+| scenario_set | string | `population` | |
+| parameters | list | [see below](./smif-prerequisites.html#scenario-parameters) | |
+
+#### Scenario Parameters
+
+For each entry in the scenario parameters list, the following metadata
+is required:
+
+| Attribute | Type | Example | Notes |
+| --- | --- | --- | --- |
+| name | string | `density` ||
+| spatial_resolution | string | `lad` ||
+| temporal_resolution |string | `annual` ||
+| units | string | `people/km^2` ||
+| filename | string | `population_density_high.csv` | Name of the file in the `project/data/scenarios` folder |
