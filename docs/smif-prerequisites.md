@@ -96,7 +96,7 @@ the smif framework:
 | outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | |
 | parameters | list | [see below](./smif-prerequisites.html#parameters) | |
 | interventions | string | `energy_demand.yml` | Name of the interventions file in the `project/data/interventions` folder |
-| initial conditions | string | `energy_demand_existing.yml` | Name of the file |
+| initial conditions | string | `energy_demand_existing.yml` | Name of the file in the `project/data/initial_conditions` folder |
 
 ### Inputs and Outputs
 
