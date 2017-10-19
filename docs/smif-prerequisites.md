@@ -76,7 +76,19 @@ python_codesnippet = here
 
 ## Data Requirements
 
+### Initial System
+
+These files hold a list of interventions for which the build date is before the
+start year of the model time horizon. 
+This enables `smif` to construct the initial systems in the simulation models.
+
 ### Initial Conditions
+
+This data holds initialisation values of parameters which are otherwise 
+dynamically determined by the model (elsewhere called 'state').
+For example, the level of a reservoir in a water supply model may be passed
+between planning years (an example of inter-seasonal or inter-year storage).
+The initial value of the reservoir level can be set in this dataset.
 
 ### Metadata
 
@@ -105,17 +117,10 @@ id,start_hour,end_hour
 
 In the above example, id `1` is associated with the start hour 0 and
 end hour 8760 - representing the entire year.
-The ISO8601 standard is used to define hourly intervals.
+The [ISO8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) standard 
+is used to define intervals.
 
 This interval id is used in data files to associate a data row with an interval.
-
-In addition, interval definitions are loaded with the following attributes:
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| name | string | `annual` | A unique name for the region definition at project level |
-| description | string | `One year-long interval` | |
-| filename | string | `annual.csv` | |
 
 #### Regions
 
