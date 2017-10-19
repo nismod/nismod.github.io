@@ -32,6 +32,7 @@ You collate, summarise and process raw data to produce scenarios of
 future change, e.g. population, demographics and economic growth.
 
 Please follow these guidelines:
+1. [Download](../files/integration_template.xlsx) the template
 1. [Metadata](./smif-prerequisites.html#metadata)
 2. [Scenarios](./smif-prerequisites.html#scenarios)
 
@@ -40,6 +41,7 @@ Please follow these guidelines:
 You develop and implement a simulation model of an infrastructure system.
 
 Please follow these guidelines:
+1. [Download](../files/integration_template.xlsx) the template
 1. [Metadata](./smif-prerequisites.html#metadata)
 1. [Sector Model config](./smif-prerequisites.html#configuration-sector-model)
 2. [Interventions](./smif-prerequisites.html#interventions)
@@ -52,6 +54,7 @@ You use a system-of-systems model to analyse the evolution of coupled
 infrastructure systems, interdependencies under different scenarios
 
 Please follow these guidelines:
+1. [Download](../files/integration_template.xlsx) the template
 1. [Narratives](./smif-prerequisites.html#narratives)
 
 ## Packaging and Deployment
