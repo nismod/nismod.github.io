@@ -7,17 +7,17 @@ layout: presentation
 
 ### A short introduction to version control with Git
 
-Tom Russell &amp; Will Usher
+Tom Russell, Will Usher &amp; Roald Lemmen
 
 ---
 
 # Agenda
 
-1. intro (Will)
-1. concepts (Tom)
+1. intro
+1. concepts
 1. live coding (Both)
-1. summary (Tom)
-1. next steps (Will)
+1. summary
+1. next steps
 
 ---
 
@@ -101,6 +101,16 @@ A list of commands used in the session is available for quick reference:
 
 ## Summary
 
+`git clone`
+
+`git add ...`
+
+`git commit -m "..."`
+
+`git push`
+
+`git pull`
+
 ---
 
 ## Branch
@@ -131,34 +141,6 @@ Cheatsheet from Github
 
 ---
 
-## Automate your workflow
+## Thanks
 
-* Repetition - bad
-* Automation - good
-  * e.g. write a script to fetch data, run analysis and draw graphs
-* Make research reproducible and auditable
-
-```
-$ my_model --version
-98d2
-$ fetch_dataset(53dl)
-dataset_53dl
-$ run_model(dataset_53dl)
-results_2017_04_13_53dl_98d2
-$ create_graphs(results_2017_04_13_53dl_98d2)
-```
-
----
-
-## Write Tests
-
-* Regression Tests
-  * Does my model give the same results as last time with the same data?
-* Functional Tests
-  * Does my model produce the result in the way I want, when I give it a dataset?
-* Unit Tests
-  * Does `fetch_dataset` fetch `dataset_53dl` when passed the argument `53dl`?
-
----
-
-## Use Version Control
+Questions?
