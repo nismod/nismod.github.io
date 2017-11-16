@@ -29,3 +29,10 @@ styling.
 Add a html file (`something-else.html`) to the `_presentations` directory with
 content in markdown format to create a [`remark.js`](https://remarkjs.com/)
 presentation.
+
+To build and serve the site locally:
+
+```bash
+bundle exec jekyll serve
+```
+
