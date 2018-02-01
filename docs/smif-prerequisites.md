@@ -187,14 +187,14 @@ energy_demand:
   assump_diff_floorarea_pp: 0.5
 ```
 
-### Scenario Definition
+### Data
 
-> add your data to the `scenario_definitions` tab in the template. Add a row for each new scenario.
+> add your data to the `data` tab in the template. Add a row for each new piece of dummy data.
 
-This section is for [data providers](./smif-prerequisites.html#data-provider).
+This section is for [data providers](./smif-prerequisites.html#data-provider) and [modellers](./smif-prerequisites.html#sector-modeller).
 
-Scenario definitions hold the metadata associated with the scenario data. 
-Add a new row to the scenario definition for each new scenario you add to the template.
+The data tab holds the metadata associated with scenario data and all dummy model input and output data. 
+Add a new row to the sheet for each new input or output you add to the template.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -205,42 +205,6 @@ Add a new row to the scenario definition for each new scenario you add to the te
 | temporal_resolution | string | `annual` | The name of the interval definition used by the scenario data |
 | units | string | `people` | The unit used by the scenario data. Scenario data cannot mix units within a scenario file |
 
-### Scenarios
-
-> add your data to the `scenario` tab in the template or include the data in a csv file. Make a new tab or file for each scenario.
-
-This section is for [data providers](./smif-prerequisites.html#data-provider).
-
-Below is an example scenarios file which shows the change in population
-for three regions, England, Scotland and Wales for the years
-2010, 2015 and 2020.
-The polygons associated with the regions are stored in a [region definitions](./smif-prerequisites.html#region-definition)
-file.
-The duration associated with the interval `1` are stored
-in the [interval definitions](./smif-prerequisites.html#interval-definition) file.
-See the [metadata](./smif-prerequisites.html#metadata) section for details on
-how to define region and interval definitions if you have not already done so.
-
-```
-timestep,region,interval,value
-2010,England,1,52000000
-2010,Scotland,1,5100000
-2010,Wales,1,2900000
-2015,England,1,53000000
-2015,Scotland,1,5300000
-2015,Wales,1,3000000
-2020,England,1,54000000
-2020,Scotland,1,5500000
-2020,Wales,1,3200000
-```
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| timestep | integer | `2010` | A valid year integer |
-| region | string | `England` | Reference to the names of the regions in the associated [region definition file](./smif-prerequisites.html#regions)|
-| interval | string | `1` | Reference to  the id of the intervals in the associated [interval definition file](./smif-prerequisites.html#intervals)|
-| value | float | `52000000` | Will normally be a floating point number |
-
 ## Sector Model Data Requirements
 
 This section is for [modellers](./smif-prerequisites.html#sector-modeller).
@@ -248,9 +212,11 @@ This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 The following configuration data is required to integrate a sector model within
 the smif framework
 
+**Please provide dummy data for a minimum of two inputs and outputs to your model**
+
 | Attribute | Type | Notes | Template |
 | --- | --- | --- | --- |
-| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_inputs` tab|
+| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_inputs` and `input_data` tabs|
 | outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_outputs` tab |
 | parameters | list | [see below](./smif-prerequisites.html#parameters) | Enter data into `parameters` tab |
 | interventions | list | [see below](./smif-prerequisites.html#interventions) | Enter data into `interventions` tab |
@@ -259,17 +225,19 @@ the smif framework
 
 ### Inputs and Outputs
 
-> add your data to the `sectormodel_inputs` and `sectormodel_outputs` tabs in the template
+> add your data to the `sectormodel_inputs`, `sectormodel_outputs` and `data` tabs in the template
 
 `smif` requires all model inputs and outputs to be explicitly defined
 so that data can be passed to and retrieved from a model at runtime.
 
 Wherever you have a data passed into your model from another source, you should
-define an input.
-For each of the results your model produces, you need to define an output.
-For example, a digital communications model may require `population` data as an
+define an input (and where that data should come from).
+For each of the results your model produces, you need to define an output 
+(and where you think that data should go).
+For example, a digital communications model may require `population` data from
+a scenario as an
 input, and produce a `service quality` metric and 
-a `fibre-optic repeater electricity demand` as an output
+a `fibre-optic repeater electricity demand` as an output both of which are results.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -277,8 +245,19 @@ a `fibre-optic repeater electricity demand` as an output
 | spatial_resolution | string | `lad` | Reference to the name of a region definition |
 | temporal_resolution | string | `annual` | Reference to the name of an interval definition |
 | units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
+| source/destination notes | string | `pop table, INSERT x INTO TABLE y;` | Name and info of the part of the model this data is read from/written to |
+| sample/dummy data | string | `population_density` | References the name of an example datafile in the `data` tab |
+| absolute_range_lower	| var | `0` | For validation: the lowest value accepted by the model |
+| absolute_range_upper	| var | `inf` | For validation: the highest value accepted by the model |
+| suggested_range_lower	| var | `set of power stations` | For validation: the lowest value suggested for the model |
+| suggested_range_upper	| var | `set of power stations` | For validation: the highest suggested value for the model |
+| destination/source	| string | `population scenario` | Where you expect the data will go/come from e.g. another model or scenario |
+| licenses/restrictions	| string | `open data` | Any notes of data restrictions or licenses to flag follow up |
+| url (if applicable)	| string | `http://www.open_pop.org/` | A url to the data source if open data and if appropriate |
+| description	| string | `Open data from open pop org` | A description of the data source |
+| tools or script used to process (if applicable)| string | `github.com/nismod/myscript` | A link to the url, name of a script or code or notes used to process the raw data |
 
-The dependency upon another data source are explicitly declared in the
+The dependencies upon another data source are explicitly declared in the
 integration framework.
 To declare a dependency, both models must have the requisite inputs
 and outputs defined.
@@ -306,10 +285,12 @@ but future versions will support categorical and boolean parameters.
 | --- | --- | --- | --- |
 | name | string | `assump_diff_floorarea_pp`| |
 | description | string | `Difference in floor area per person in end year compared to base year` | |
-| absolute_range | tuple | (0.5, 2) | |
-| suggested_range | tuple | (0.5, 2) | |
-| default_value | float | 1 | |
-| units | string | `percentage` | |
+| absolute_range_lower | var | `0.5` | A value below of this would cause your model to fail |
+| absolute_range_upper | var | `inf` | A value above of this would cause your model to fail |
+| suggested_range_lower | var | `0.5` | Hints to users as to what is a sensible value |
+| suggested_range_upper | var | `2` | Hints to users as to what is a sensible value |
+| default_value | float | `1` | |
+| units | string | `percentage` | Units should be listed in the `units` tab |
 
 ### Interventions
 
