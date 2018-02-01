@@ -245,7 +245,7 @@ a `fibre-optic repeater electricity demand` as an output both of which are resul
 | spatial_resolution | string | `lad` | Reference to the name of a region definition |
 | temporal_resolution | string | `annual` | Reference to the name of an interval definition |
 | units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
-| source/destination notes | string | `population density table, INSERT population_density INTO TABLE population;` | Name and info of the part of the model this data is read from/written to |
+| source/destination notes | string | `pop table, INSERT x INTO TABLE y;` | Name and info of the part of the model this data is read from/written to |
 | sample/dummy data | string | `population_density` | References the name of an example datafile in the `data` tab |
 | absolute_range_lower	| var | `0` | For validation: the lowest value accepted by the model |
 | absolute_range_upper	| var | `inf` | For validation: the highest value accepted by the model |
@@ -253,8 +253,8 @@ a `fibre-optic repeater electricity demand` as an output both of which are resul
 | suggested_range_upper	| var | `set of power stations` | For validation: the highest suggested value for the model |
 | destination/source	| string | `population scenario` | Where you expect the data will go/come from e.g. another model or scenario |
 | licenses/restrictions	| string | `open data` | Any notes of data restrictions or licenses to flag follow up |
-| url (if applicable)	| string | `http://www.open_pop.org/datasets/2010.html` | A url to the data source if open data and if appropriate |
-| description	| string | `Open population density data from the open pop organisation` | A description of the data source |
+| url (if applicable)	| string | `http://www.open_pop.org/` | A url to the data source if open data and if appropriate |
+| description	| string | `Open data from open pop org` | A description of the data source |
 | tools or script used to process (if applicable)| string | `github.com/nismod/myscript` | A link to the url, name of a script or code or notes used to process the raw data |
 
 The dependencies upon another data source are explicitly declared in the
