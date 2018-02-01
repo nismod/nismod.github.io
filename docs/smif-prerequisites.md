@@ -187,14 +187,14 @@ energy_demand:
   assump_diff_floorarea_pp: 0.5
 ```
 
-### Scenario Definition
+### Data
 
-> add your data to the `scenario_definitions` tab in the template. Add a row for each new scenario.
+> add your data to the `data` tab in the template. Add a row for each new piece of dummy data.
 
-This section is for [data providers](./smif-prerequisites.html#data-provider).
+This section is for [data providers](./smif-prerequisites.html#data-provider) and [modellers](./smif-prerequisites.html#sector-modeller).
 
-Scenario definitions hold the metadata associated with the scenario data. 
-Add a new row to the scenario definition for each new scenario you add to the template.
+The data tab holds the metadata associated with scenario data and all dummy model input and output data. 
+Add a new row to the sheet for each new input or output you add to the template.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -205,48 +205,14 @@ Add a new row to the scenario definition for each new scenario you add to the te
 | temporal_resolution | string | `annual` | The name of the interval definition used by the scenario data |
 | units | string | `people` | The unit used by the scenario data. Scenario data cannot mix units within a scenario file |
 
-### Scenarios
-
-> add your data to the `scenario` tab in the template or include the data in a csv file. Make a new tab or file for each scenario.
-
-This section is for [data providers](./smif-prerequisites.html#data-provider).
-
-Below is an example scenarios file which shows the change in population
-for three regions, England, Scotland and Wales for the years
-2010, 2015 and 2020.
-The polygons associated with the regions are stored in a [region definitions](./smif-prerequisites.html#region-definition)
-file.
-The duration associated with the interval `1` are stored
-in the [interval definitions](./smif-prerequisites.html#interval-definition) file.
-See the [metadata](./smif-prerequisites.html#metadata) section for details on
-how to define region and interval definitions if you have not already done so.
-
-```
-timestep,region,interval,value
-2010,England,1,52000000
-2010,Scotland,1,5100000
-2010,Wales,1,2900000
-2015,England,1,53000000
-2015,Scotland,1,5300000
-2015,Wales,1,3000000
-2020,England,1,54000000
-2020,Scotland,1,5500000
-2020,Wales,1,3200000
-```
-
-| Attribute | Type | Example | Notes |
-| --- | --- | --- | --- |
-| timestep | integer | `2010` | A valid year integer |
-| region | string | `England` | Reference to the names of the regions in the associated [region definition file](./smif-prerequisites.html#regions)|
-| interval | string | `1` | Reference to  the id of the intervals in the associated [interval definition file](./smif-prerequisites.html#intervals)|
-| value | float | `52000000` | Will normally be a floating point number |
-
 ## Sector Model Data Requirements
 
 This section is for [modellers](./smif-prerequisites.html#sector-modeller).
 
 The following configuration data is required to integrate a sector model within
 the smif framework
+
+**Please provide dummy data for a minimum of two inputs and outputs to your model**
 
 | Attribute | Type | Notes | Template |
 | --- | --- | --- | --- |
@@ -285,8 +251,8 @@ a `fibre-optic repeater electricity demand` as an output both of which are resul
 | absolute_range_upper	| var | `inf` | For validation: the highest value accepted by the model |
 | suggested_range_lower	| var | `set of power stations` | For validation: the lowest value suggested for the model |
 | suggested_range_upper	| var | `set of power stations` | For validation: the highest suggested value for the model |
-| source	| string | `population scenario` | Where you expect the data will come from e.g. another model or scenario |
-| licenses	| string | `open data` | Any notes of data restrictions or licenses to flag follow up |
+| destination/source	| string | `population scenario` | Where you expect the data will go/come from e.g. another model or scenario |
+| licenses/restrictions	| string | `open data` | Any notes of data restrictions or licenses to flag follow up |
 | url (if applicable)	| string | `http://www.open_pop.org/datasets/2010.html` | A url to the data source if open data and if appropriate |
 | description	| string | `Open population density data from the open pop organisation` | A description of the data source |
 | tools or script used to process (if applicable)| string | `github.com/nismod/myscript` | A link to the url, name of a script or code or notes used to process the raw data |
