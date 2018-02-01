@@ -250,7 +250,7 @@ the smif framework
 
 | Attribute | Type | Notes | Template |
 | --- | --- | --- | --- |
-| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_inputs` tab|
+| inputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_inputs` and `input_data` tabs|
 | outputs | list | [see below](./smif-prerequisites.html#inputs-and-outputs) | Enter data into `sectormodel_outputs` tab |
 | parameters | list | [see below](./smif-prerequisites.html#parameters) | Enter data into `parameters` tab |
 | interventions | list | [see below](./smif-prerequisites.html#interventions) | Enter data into `interventions` tab |
@@ -259,17 +259,19 @@ the smif framework
 
 ### Inputs and Outputs
 
-> add your data to the `sectormodel_inputs` and `sectormodel_outputs` tabs in the template
+> add your data to the `sectormodel_inputs`, `sectormodel_outputs` and `data` tabs in the template
 
 `smif` requires all model inputs and outputs to be explicitly defined
 so that data can be passed to and retrieved from a model at runtime.
 
 Wherever you have a data passed into your model from another source, you should
-define an input.
-For each of the results your model produces, you need to define an output.
-For example, a digital communications model may require `population` data as an
+define an input (and where that data should come from).
+For each of the results your model produces, you need to define an output 
+(and where you think that data should go).
+For example, a digital communications model may require `population` data from
+a scenario as an
 input, and produce a `service quality` metric and 
-a `fibre-optic repeater electricity demand` as an output
+a `fibre-optic repeater electricity demand` as an output both of which are results.
 
 | Attribute | Type | Example | Notes |
 | --- | --- | --- | --- |
@@ -277,8 +279,19 @@ a `fibre-optic repeater electricity demand` as an output
 | spatial_resolution | string | `lad` | Reference to the name of a region definition |
 | temporal_resolution | string | `annual` | Reference to the name of an interval definition |
 | units | string | `people/km^2`| SI units are automatically parsed, otherwise a warning is raised |
+| source/destination notes | string | `population density table, INSERT population_density INTO TABLE population;` | Name and info of the part of the model this data is read from/written to |
+| sample/dummy data | string | `population_density` | References the name of an example datafile in the `data` tab |
+| absolute_range_lower	| var | `0` | For validation: the lowest value accepted by the model |
+| absolute_range_upper	| var | `inf` | For validation: the highest value accepted by the model |
+| suggested_range_lower	| var | `set of power stations` | For validation: the lowest value suggested for the model |
+| suggested_range_upper	| var | `set of power stations` | For validation: the highest suggested value for the model |
+| source	| string | `population scenario` | Where you expect the data will come from e.g. another model or scenario |
+| licenses	| string | `open data` | Any notes of data restrictions or licenses to flag follow up |
+| url (if applicable)	| string | `http://www.open_pop.org/datasets/2010.html` | A url to the data source if open data and if appropriate |
+| description	| string | `Open population density data from the open pop organisation` | A description of the data source |
+| tools or script used to process (if applicable)| string | `github.com/nismod/myscript` | A link to the url, name of a script or code or notes used to process the raw data |
 
-The dependency upon another data source are explicitly declared in the
+The dependencies upon another data source are explicitly declared in the
 integration framework.
 To declare a dependency, both models must have the requisite inputs
 and outputs defined.
@@ -306,10 +319,12 @@ but future versions will support categorical and boolean parameters.
 | --- | --- | --- | --- |
 | name | string | `assump_diff_floorarea_pp`| |
 | description | string | `Difference in floor area per person in end year compared to base year` | |
-| absolute_range | tuple | (0.5, 2) | |
-| suggested_range | tuple | (0.5, 2) | |
-| default_value | float | 1 | |
-| units | string | `percentage` | |
+| absolute_range_lower | var | `0.5` | A value below of this would cause your model to fail |
+| absolute_range_upper | var | `inf` | A value above of this would cause your model to fail |
+| suggested_range_lower | var | `0.5` | Hints to users as to what is a sensible value |
+| suggested_range_upper | var | `2` | Hints to users as to what is a sensible value |
+| default_value | float | `1` | |
+| units | string | `percentage` | Units should be listed in the `units` tab |
 
 ### Interventions
 
