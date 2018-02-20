@@ -1,0 +1,549 @@
+---
+title: Practical - Branch and Merge with Git
+layout: presentation
+---
+
+# Computational Science Seminar
+
+### Branching and merging with Git
+
+Tom Russell &amp; Roald Lemmen
+
+---
+
+# Agenda
+
+1. introduction
+1. git recap
+1. practical 1 (30 min)
+1. branching and merging
+1. practical 2 (45 min)
+1. next steps
+
+---
+
+## Resources
+
+These slides are available from:
+- https://nismod.github.io/presentations/git-branching-merging.html
+
+An introduction to Git is available from:
+- https://nismod.github.io/presentations/a-short-intro-to-git.html
+
+Further resources are available from the website:
+- https://nismod.github.io/git-novice/
+
+A list of commands used in the session is available for quick reference:
+- https://nismod.github.io/git-novice/commands/
+
+---
+
+# Recap
+
+* Today's focus is branching and merging, but we will recap as well
+
+* 2 hours available for both theory and practice
+
+* Version control (and git in particular) has a steep learning curve – do ask
+  for help getting started
+
+* There are many resources for self learning
+  * Software Carpentry
+  * Courses within the University of Oxford / Lynda.com
+  * The Research Support team in SOGE
+
+---
+
+## What is Git?
+
+* version control system
+
+* keep track of changes
+
+* Other examples:
+    * File naming: program_v1.py, program_v2.py
+    * Microsoft Word Track changes
+    * Other repository systems such as: Subversion (SVN) or Concurrent Version System (CVS)
+
+---
+
+## The git architecture
+
+* The Git 'Three-tree-architecture'
+
+![Three tree architecture](../fig/three-tree-commit.png)
+
+---
+
+## The git workflow
+
+- **commit**
+
+  a small set of changes, which accumulate to make a **history** of commits
+
+--
+
+- **repository**
+
+  a place for a project
+
+--
+
+- **remote** repository
+
+  a place to share a project
+
+--
+
+- **branch**
+
+  a way to separate work on new versions, bug-fixes or features
+
+--
+
+- **merge**
+
+  a way to incorporate changes from one branch into another
+
+---
+
+## Commits
+
+![Changes Are Saved Sequentially](../fig/play-changes.svg)
+
+---
+
+## Repository
+
+![Stage changes to a repository](../fig/git-repository.svg)
+
+---
+
+## Remote
+
+![Remote Repository After Creation](../fig/git-remote.svg)
+
+---
+
+## Remote
+
+![Remote Repository After remote-add](../fig/git-remote.1.svg)
+
+---
+
+## Remote
+
+![Remote Repository After First Push](../fig/git-remote.2.svg)
+
+---
+
+## Branch
+
+![Different Versions Can be Saved](../fig/versions.svg)
+
+---
+
+## Merge
+
+![Multiple Versions Can be Merged](../fig/merge.svg)
+
+---
+
+## Summary
+
+Starting out
+
+`git init`
+
+`git clone`
+
+<br>
+
+--
+
+Committing
+
+`git add ...`
+
+`git commit -m "..."`
+
+<br>
+
+--
+
+Information
+
+`git status`
+
+`git log`
+
+---
+
+## Summary
+
+Remotes
+
+`git push`
+
+`git pull`
+
+<br>
+
+--
+
+Branches
+
+`git branch ...`
+
+`git merge ...`
+
+`git checkout ...`
+
+--
+
+<br>
+
+**......Questions?**
+
+--
+
+<br>
+
+...then let's get ready
+
+---
+
+# Practical 1
+
+## Installing Git
+
+Windows: 
+* Download and install:
+`http://git-scm.com/download/win`
+
+Linux (most debian-based distributions)
+* Download and install:
+`apt-get install git-all`
+
+Others:
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+---
+
+# Practical 1
+## Configuring Git
+
+```
+git config --global user.name "Roald Lemmen"
+git config --global user.email "roald.lemmen@ouce.ox.ac.uk"
+git config --global color.ui "auto"
+git config --global core.editor notepad` or alternative editor
+```
+
+* These settings are stored in stored in $root/.git/.gitconfig
+* The email address should be the same as the one configured in your remote repository (such as Github)
+
+---
+
+# Practical 1
+## Line endings
+
+Windows and Mac/Linux handle line endings differently, and we want to be able to
+share files between operating systems.
+
+Git has a setting that _should_ let us set a sensible default.
+
+On Windows, set it to `true`:
+
+```bash
+git config --global core.autocrlf true
+```
+
+On Mac or Linux, set it to `input`:
+
+```bash
+git config --global core.autocrlf input
+```
+---
+
+# Practical 1
+## Objectives
+* Make sure all computers are setup correctly
+* Recap the Git Basics
+
+## Exercise
+We are are looking for a Mistral team activity (about 15 people) in Oxford. We would like to ask the community (you!), to help us develop a map of recommendations. This can be anything, from a good bar, restaurant, activity to a museum.
+
+```
+Assignment: Add 5 recommendations to the map
+```
+
+Gitlab repository: http://
+
+---
+
+# Branching and merging
+
+Objectives:
+* Gain a understand of Git commit-identifier and HEAD
+* Gain a deeper understanding of branching and merging
+* Demonstrate branch, merge and merge conflicts
+
+---
+
+## Commit identifiers (Hash) values in Git
+
+Each commit contains
+* Metadata
+* File changes
+* Parent identifier - SHA (Secure Hash Algorithm)
+
+<br/>
+
+<img src="../fig/git-commits-and-parents.png" height="70%" width="70%">
+
+---
+
+## HEAD in Git
+
+How does git know what branch you are currently on?
+* Git keeps a special pointer called HEAD
+* HEAD is a reference to the identifier of the last commit in the currently checked-out branch
+
+<br/>
+
+<img src="../fig/git-head-to-master.png" height="70%" width="70%">
+
+---
+
+## HEAD in Git
+
+* The HEAD moves forward with each commit
+* HEAD helps easily switch your work environment to other branches
+
+<br/>
+
+![Branching](../fig/git-branching.png)
+
+---
+
+## Basic branching
+
+Create a new branch
+
+`git branch ...`
+
+<br/>
+
+--
+
+Show branches
+
+`git branch`
+
+--
+
+<br/>
+
+Checkout a branch 
+
+`git checkout ...`
+
+--
+
+<br/>
+
+Make a change, stage the change and commit
+
+`git add ...`
+
+`git commit -m "..."`
+
+--
+
+<br/>
+
+(Optional) Change in-between branches
+
+`git checkout ...`
+
+---
+
+## Basic merging
+
+Check out the receiving branch
+
+`git checkout ...`
+
+<br/>
+
+--
+
+Merge changes into the receiving branch
+
+`git merge ...`
+
+---
+
+## More about merging
+
+Three types of merging:
+
+--
+
+* Fast-forward merge
+  * If no commits have been made to receiving branch since branching
+  * Append commits on tip of the receiving branch
+  * No additional commit will be made
+
+---
+
+# Fast-forward merge
+
+<img src="../fig/git-merge-fastforward-1.svg">
+
+---
+
+# Fast-forward merge
+
+<img src="../fig/git-merge-fastforward-2.svg">
+
+---
+
+## More about merging
+
+* True merge
+  * If additional commits were made to the receiving branch
+  * and git can solve the merge by an inbuilt strategy
+  * Merge commit will be made
+
+---
+
+## More about merging
+
+<img src="../fig/git-merge-true-1.svg" height="416" width="503">
+
+---
+
+## More about merging
+
+<img src="../fig/git-merge-true-2.svg" height="444" width="706">
+
+---
+
+## More about merging
+
+* But what if git can't solve the merge?
+
+--
+
+<img src="../fig/merge-conflict.png">
+
+--
+
+* Merge conflicts
+  * Branches have conflicting modifications in a file
+  * Error message will pop up (CONFLICT (content): Merge conflict in ...)
+  * Git marks the conflict in file 
+
+---
+
+## Merge conflicts
+
+Three options in case of a merge conflict:
+
+* 1) abort merge to return to stage before merge attempts
+
+`git merge --abort`
+
+--
+
+* 2) solve merge manually (edit temporary file, remove flags and save)
+
+`git add <file>`
+
+`git commit -m "Merged branch manually"`
+
+--
+
+* 3) use merge tool
+
+`git mergetool --tool`
+
+---
+
+## Merge conflicts
+
+* Git will mark the file
+```
+print('Hello, dog!')
+<<<<<<< HEAD
+print('Hello, cat!')
+=======
+>>>>>>> master
+```
+--
+
+* Which can just be resolved using a standard text editor
+
+--
+
+* Or a more advanced one with support for this, such as Visual Studio Code:
+
+<img src="../fig/merge-conflict-vscode.png">
+
+---
+
+# Practical 2
+
+## Objectives:
+* Understand the Git workflow
+* Practice checkout, commit, branching and merging
+* Learn how to resolve merge conflicts
+* Learn how to contribute to a Git project
+
+## Exercise
+```
+Assignment: We would like to ask your help, to categorize the contents on the map.
+Change the colour to the following:
+
+* Pub (Green)
+* Restaurant (Blue)
+* Sports (Yellow)
+* Museum (Red)
+* Others (Grey)
+```
+
+---
+
+## Git workflow
+
+* https://guides.github.com/introduction/flow/
+
+---
+
+## Git Documentation
+
+`git --help`
+<br>
+
+Git manual
+- https://git-scm.com/docs/git
+
+Git book
+- https://git-scm.com/book/en/v2
+
+Cheatsheet from Github
+- https://education.github.com/git-cheat-sheet-education.pdf
+
+---
+
+## Thanks!
+
+Questions?
+
+[https://nismod.github.io/presentations/a-short-intro-to-git.html](https://nismod.github.io/presentations/a-short-intro-to-git.html)
+
+tom.russell@ouce.ox.ac.uk
+
+roald.lemmen@ouce.ox.ac.uk
