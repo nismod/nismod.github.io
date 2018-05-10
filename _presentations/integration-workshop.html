@@ -1,0 +1,172 @@
+---
+title: Integration Workshop
+layout: presentation
+---
+
+# Mistral Assembly 2018
+
+### Integration Workshop
+
+Will Usher, Tom Russell &amp; Roald Lemmen
+
+---
+
+# Agenda
+
+Day 2: Morning (09:30 - 10:30)
+
+1. Overview and challenges (Will)
+1. The Software Model Integration Framework (Roald)
+1. Plenary discussion
+
+---
+
+# What is Smif
+
+* Smif - Software Model Integration Framework 
+
+<center>  
+  <img src="../fig/integration-workshop/smif-overview.png" alt="Smif Overview" align="middle" style="width: 600px;"/>
+</center>
+
+<!--
+smif is a framework for handling the creation of system-of-systems models. 
+The framework handles inputs and outputs, dependencies between models, persistence of data and the communication of state across years.
+It has been developed to facilitate the itegration process of a system-of-systems model
+-->
+
+---
+
+# What can it do
+
+* Wrap a Sector Model
+  + Methods for model initialise and simulate
+  + Datahandle to provide parameters, inputs and store outputs
+
+* Build a System-of-System Model
+  + Manage inputs, outputs, dependencies and parameters
+  + Manage scenarios and narratives
+  + Data conversions between units, space and time
+
+* Execute Model Runs
+  + Configure Scenarios, Narratives and Timesteps
+  + Start Model Runs
+  + Store Model Run results
+
+<!--
+  The framework provides the foll
+-->
+
+# Wrap a Sector Model
+
+<center>
+    <img src="../fig/integration-workshop/smif-wrapper.png" alt="Smif Results" width="400px" height="auto"/>
+</center>  
+
+---
+
+# Build a System-of-System model
+
+Smif App
+
+<center>
+  <img class="gifplayer" src="../fig/integration-workshop/smif-app-preview.png" data-gif="../fig/integration-workshop/smif-app.gif" width="700px" height="auto"/>
+</center>
+
+---
+
+# Execute Model Runs
+
+Smif Run
+
+<br>
+<center>
+  <img class="gifplayer" src="../fig/integration-workshop/smif-run-preview.png" data-gif="../fig/integration-workshop/smif-run.gif" width="700px" height="auto"/>
+</center>
+
+---
+
+# Execute Model Runs
+
+Smif Results
+
+<br>
+<br>
+<center>
+    <img src="../fig/integration-workshop/smif-results.png" alt="Smif Results" width="700px" height="auto"/>
+</center>  
+
+---
+
+# Further steps
+
+* Wrappers for all Sector Models
+
+<style>  
+  th {
+      background-color: #006E79;
+      color: white;
+      text-align:left;
+  }
+</style>
+
+<table style="width:100%">
+    <tr>
+      <th>Sector</th>
+      <th>Wrapper</th>
+      <th>Collaborations</th>
+      <th>System-of-Systems</th>
+    </tr>
+    <tr>
+      <td>Energy Supply</td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/><sup>Energy Demand-Supply</sup></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+    </tr>
+    <tr>
+      <td>Energy Demand</td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/><sup>Energy Demand-Supply</sup></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+    </tr>
+    <tr>
+      <td>Digital Comms</td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      </tr>
+    <tr>
+      <td>Transport</td>
+      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+    </tr>
+    <tr>
+      <td>Solid Waste</td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+    </tr>
+    <tr>
+      <td>Water Supply</td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
+    </tr>
+  </table> 
+
+* Smif debugging tools
+* Result visualisation
+
+---
+
+
+## Thanks!
+
+Questions?
+
+[https://nismod.github.io/presentations/a-short-intro-to-git.html](https://nismod.github.io/presentations/a-short-intro-to-git.html)
+
+tom.russell@ouce.ox.ac.uk
+
+roald.lemmen@ouce.ox.ac.uk
