@@ -3,11 +3,11 @@ title: Integration Workshop
 layout: presentation
 ---
 
-# Mistral Assembly 2018
+<!-- # Mistral Assembly 2018 -->
 
 ### Integration Workshop
 
-Will Usher, Tom Russell &amp; Roald Lemmen
+Will Usher, Tom Russell &amp; Roald Schoenmakers
 
 ---
 
@@ -15,9 +15,117 @@ Will Usher, Tom Russell &amp; Roald Lemmen
 
 Day 2: Morning (09:30 - 10:30)
 
-1. Overview and challenges (Will)
-1. The Software Model Integration Framework (Roald)
-1. Plenary discussion
+1. Progress so far (Will) - 10 mins
+1. The Software Model Integration Framework (Roald) - 10 mins
+1. Plenary discussion - 40 mins
+
+---
+
+# Overview and Challenges
+
+## Outline
+
+- Status of NISMOD v2.0
+  - smif
+  - models
+
+- Status of smif
+  - Functionality
+  - Scope
+
+- Lessons Learned
+
+???
+
+Where we are and what to do next
+
+---
+
+# NISMOD v2.x
+
+![](../fig/integration-workshop/nismod2_diagram.png)
+
+
+---
+
+# NISMOD v2.1
+
+![](../fig/integration-workshop/sos_model.png)
+
+---
+
+# NISMOD v2.1
+
+
+
+- No interdependencies (yet)
+- Dependencies defined between energy demand and supply
+  - Automatic conversion of (SI) units
+  - Implicit/Explicit spatial and temporal conversion
+
+---
+
+# Configuration
+
+
+
+---
+
+# Data
+
+FTP server at Newcastle
+
+- configuration data 
+- model data
+
+---
+
+# Releases
+
+- Hosted on FTP server at Newcastle, password protected
+- Hosted on Python Package Index (`HIRE`, `smif`, `CCAM`)
+
+
+
+---
+
+# Sector Model Progress
+
+![](../fig/integration-workshop/sector_model_status.png)
+
+
+---
+
+# Lessons we have learned...
+
+- Wrappers are a contract - explicitly declare the data the model requires to run
+- Units are important
+- Validating data inputs make debugging a LOT easier
+  - sign
+  - magnitude
+  - range
+- Keep it simple - by splitting into stages
+  - e.g. energy demand has 63 outputs, energy supply requires 8 inputs aggregated from 26 energy demand outputs
+- Model data is multi-dimensional and dimensions are (mostly) categorical
+  - generalise dimensions of data
+  - e.g. spatial, temporal, fuel types, end-uses, transport modes, technologies etc.
+
+
+
+
+---
+
+## Thanks!
+
+Questions?
+
+william.usher@ouce.ox.ac.uk
+
+---
+
+### The Software Model Integration Framework 
+
+Roald Schoenmakers
 
 ---
 
@@ -227,7 +335,14 @@ Discussion:
 
 # Discussion
 
-## Internal collaborations - what does smif need to do to enable the collaborations
+## Internal collaborations - what does NISMOD need to do to enable collaboration?
+
++ Who are your collaborators?
++ What do you want to do?
+
+- interdependencies
+- narratives - technology learning, governance
+- strategies and decisions
 
 ---
 
@@ -237,7 +352,7 @@ Questions?
 
 [https://nismod.github.io/presentations/integration-workshop.html](https://nismod.github.io/presentations/integration-workshop.html)
 
-will.usher@ouce.ox.ac.uk
+william.usher@ouce.ox.ac.uk
 
 tom.russell@ouce.ox.ac.uk
 
