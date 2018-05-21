@@ -25,14 +25,10 @@ Day 2: Morning (09:30 - 10:30)
 
 ## Outline
 
-- Status of NISMOD v2.0
-  - smif
-  - models
-
-- Status of smif
-  - Functionality
-  - Scope
-
+- NISMOD v2
+  - Status
+  - Initial Results
+- Sector Model Progress
 - Lessons Learned
 
 ???
@@ -56,8 +52,6 @@ Where we are and what to do next
 
 # NISMOD v2.1
 
-
-
 - No interdependencies (yet)
 - Dependencies defined between energy demand and supply
   - Automatic conversion of (SI) units
@@ -65,25 +59,13 @@ Where we are and what to do next
 
 ---
 
-# Configuration
+# Spatial and Temporal Conversions
 
-
-
----
-
-# Data
-
-FTP server at Newcastle
-
-- configuration data 
-- model data
+![Temporal Remapping]()
 
 ---
 
-# Releases
-
-- Hosted on FTP server at Newcastle, password protected
-- Hosted on Python Package Index (`HIRE`, `smif`, `CCAM`)
+# Example Results
 
 
 
@@ -92,6 +74,23 @@ FTP server at Newcastle
 # Sector Model Progress
 
 ![](../fig/integration-workshop/sector_model_status.png)
+
+---
+
+# Model Data
+
+FTP server at Newcastle
+
+- configuration data 
+- model data
+
+
+---
+
+# Releases
+
+- Hosted on FTP server at Newcastle, password protected
+- Hosted on Python Package Index (`HIRE`, `smif`, `CCAM`)
 
 
 ---
@@ -109,9 +108,6 @@ FTP server at Newcastle
 - Model data is multi-dimensional and dimensions are (mostly) categorical
   - generalise dimensions of data
   - e.g. spatial, temporal, fuel types, end-uses, transport modes, technologies etc.
-
-
-
 
 ---
 
