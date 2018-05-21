@@ -7,7 +7,7 @@ layout: presentation
 
 ### Integration Workshop
 
-Will Usher, Tom Russell &amp; Roald Lemmen
+Will Usher, Tom Russell, Roald Schoenmakers
 
 ---
 
@@ -34,15 +34,18 @@ Day 2: Morning (09:30 - 10:30)
 
 ???
 
-Smif is the Software Model Integration Framework.
-It is the framework that we have developed in the Mistral program to handle the creation of system-of-systems models,
-this facilitates the itegration process and helps us to build Nismod2.
+Hi I'm Roald, and I am going to introduce you to Smif, the Software Model Integration Framework.
+Smif is a framework that we have developed in the Mistral program at the ECI in Oxford to handle the creation of system-of-systems models,
+this piece of software facilitates the itegration process and helps us to build Nismod2.
 
-Smif is a framework that acts as the integration layer between system models (see illustration). 
+Smif is a framework that acts as the integration layer between system models. 
 It connect model inputs and outputs, takes care of dependencies and provides data to models in the correct spatial-temporal resolution.
 
-Today I will be demonstrating the user-interfaces that we have developed to help our users  
-setup and run a system-of-systems model.
+A model in this case would be for example an energy-demand model, that takes populations per county. And the data could be a database that provides population per local area district.
+The integration layer is Smif and the interface is the Smif app.
+
+Today I will be demonstrating the user-interfaces that we have developed to help our users, which many of you are or hopefully will be,   
+to setup and run a system-of-systems model.
 
 ---
 
@@ -57,19 +60,25 @@ Your browser does not support the video tag.
 
 ???
 
+[Don't stop the video!]
+
 Smif app is the user interface that helps to setup a system-of-systems model.
 
 In the following video, I will demonstrate the process of creating a basic energy-demand/supply system-of-systems model, that is driven by population scenarios.
 
 The video will be fairly quick, my goal is not to get into details, but I just want you to get an impression of the workflow that we have in place for system modellers.
 
->> Smif app can be opened from the command-line interface, this command opens the smif welcome screen
+>> Smif app can be opened from the commAAnd-line interface, this commAAnd opens the smif welcome screen
+
+[Stop at project overview]
 
 >> The project configuration that I have prepared contains two simulation models (energy-supply and energy-demand model) and a scenario set for population
+>> Lets have a look at the population scenario set. 
+>> The population set contains a facet for a population, which is sourced by three different data set (a low, medium and high scenario)
 
->> Lets have a look at the population scenario set. The population set contains a facet for a population, which can be sourced by three different population data set (low, medium and high)
+[Stop at project overview]
 
->> Lets have a look at the energy supply model
+>> I have prepared this project with two simulation models.
 >> The model contain a path to a wrapper file that implements the interface to this model
 >> There are inputs and outputs defined, each with a temporal and spatial resolution
 >> A similar setup can be found for the energy-demand model
@@ -95,15 +104,18 @@ Smif Run
 
 ???
 
-Smif run is a command line interface that helps to run a system-of-systems model
+So once you have created your system-of-systems model using the Smif App, you can
+go back to the commAAnd line interface and actually run the model.
 
->> **smif** Shows all of the available commands
+Smif run is a program that can be started from the commAAnd line, and it helps to run a system-of-systems model
+
+>> **smif** Shows all of the available commAAnds
 
 >> **smif list** Shows all of the available model Runs, like the one I just demonstrated
 
 >> **smif run** Starts a modelrun and shows when this is demonstrate
 
->> **smif -v run** Prints debug information to the command line interface and gives you a more detailed report of what the modelrun system is doing
+>> **smif -v run** Prints debug information to the commAAnd line interface and gives you a more detailed report of what the modelrun system is doing
 
 ---
 
@@ -120,19 +132,11 @@ Smif Results
 ???
 
 After a succesful modelrun, modelrun results will be written to the filesystem. Nicely ordered by modelname, output, timestep and temporal/spatial resolution
-In the future this will be replaced by a datastore.
+In the future it will also be possible to connect Smif to a datastore instead of writing to filesystem.
 
 ---
 
 # Some last notes
-
-* Smif is a generic framework
-
-???
-
-Smif offers a generic concept for coupling models, it is not Mistral specific and can be used to couple any-type of models.
-
---
 
 * Smif is open-source (MIT-license)
 * Current version v0.7.6
@@ -140,6 +144,8 @@ Smif offers a generic concept for coupling models, it is not Mistral specific an
 
 ???
 
+So I hope this short demonstration has provided you with a sense of what Smif is and how its going to build Nismod2.
+I just wanted to make some last remarkt.
 Smif is open source, the current version is v0.7.6 is available on Github.
 
 --
@@ -158,7 +164,7 @@ Smif is available on the Python package index and there are sample projects to g
 * Consult with Sector Modellers
 
 * Ideas
-  + Modelrun user-interface (now only CLI)
+  + Modelrun user-interface (currently only Command Line Interface)
   + Data visualisation
   + Tools to support integration debugging
 
@@ -166,11 +172,14 @@ Smif is available on the Python package index and there are sample projects to g
 
 Further steps
 
-At this moment we are pretty happy with the features. And we are starting to integrate more models into Nismod2 using Smif.
+The features that are currently in Smif provide a good basis to start building Nismod2.
 
->> We will consult with Sector Modellers to find out how can best be support this group, as we will be doing in the discussion after this presentation
+>> As the integration process goes on, we will consult with Sector Modellers to find where we could improve Smif
 
 >> Some of the ideas we have are:
+- Extending the Smif App with a Modelrun Run interface
+- Add Data visualisation capabilities for configuration and results
+- Design tools that support debugging integrated system-of-systems model
 
 ---
 
@@ -200,30 +209,28 @@ At this moment we are pretty happy with the features. And we are starting to int
 
 A challenge of developing a highly integrated model like Nismod2, 
 is that at some point the model will be used for research, while others members of the consortium still want to make changes to the model.
-To enable doing research and writing models at the same time, it is necessary to release the model regularly.
+To enable this we think it is necessary to release the model regularly.
 
->> One of the questions that we are currently asking is, how often should we release new version of Nismod?
-
---
-
-- How frequently does the Nismod2 need to be released?
-git push --set-upstream origin feature/integration-workshop
 --
 
 <center>
-  <img src="../fig/integration-workshop/discussion-deployment.png" alt="Discussion Deployment" width="400px" height="auto"/>
+  <img src="../fig/integration-workshop/discussion-deployment.png" alt="Discussion Deployment" width="300px" height="auto"/>
 </center>
 
 ???
 
-[show release cycle]
-
-We have started to formalise the following release schedule which defines a process to release a version of Nismod2 every 4-weeks
+We have started to formalise the following process that releases a version of Nismod2 every cycle
 * In the development phase modellers may make changes to the model, this phase ends with a Pre-release of Nismod2
-* This pre-release version is then tested for a week and then a final release of Nismod2 is deployed
-* This process repeats every 4-weeks
+* This pre-release version is then tested and then a final release of Nismod2 is deployed
+* This process repeats every period
 
->> We would like to discuss here, how can we best tweak, clarify or support this process?
+>> One of the questions that we are currently asking is, how often should we release new versions of Nismod?
+>> and in support of that how can we best tweak or clarify a release schedule to support this process?
+Does anyone want to comment on this or has ideas?
+
+--
+
+- How frequently does the Nismod2 need to be released?
 
 --
 
