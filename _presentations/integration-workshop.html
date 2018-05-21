@@ -24,54 +24,25 @@ Day 2: Morning (09:30 - 10:30)
 # What is Smif
 
 * Smif - Software Model Integration Framework 
+  + Connect System Models
+  + Configure a System-of-System Model
+  + Execute System-of-System Model Runs
 
 <center>  
-  <img src="../fig/integration-workshop/smif-overview.png" alt="Smif Overview" align="middle" style="width: 600px;"/>
+  <img src="../fig/integration-workshop/smif-overview.png" alt="Smif Overview" align="middle" style="width: 400px;"/>
 </center>
 
-<!--
-smif is a framework for handling the creation of system-of-systems models. 
-The framework handles inputs and outputs, dependencies between models, persistence of data and the communication of state across years.
-It has been developed to facilitate the itegration process of a system-of-systems model
--->
+???
 
----
+Smif is the Software Model Integration Framework.
+It is the framework that we have developed in the Mistral program to handle the creation of system-of-systems models,
+this facilitates the itegration process and helps us to build Nismod2.
 
-# What can it do
+Smif is a framework that acts as the integration layer between system models (see illustration). 
+It connect model inputs and outputs, takes care of dependencies and provides data to models in the correct spatial-temporal resolution.
 
-* Wrap a Sector Model
-  + Methods for model initialise and simulate
-  + Datahandle to provide parameters, inputs and store outputs
-
-* Build a System-of-System Model
-  + Manage inputs, outputs, dependencies and parameters
-  + Manage scenarios and narratives
-  + Data conversions between units, space and time
-
-* Execute Model Runs
-  + Configure Scenarios, Narratives and Timesteps
-  + Start Model Runs
-  + Store Model Run results
-
-<!--
-  The framework provides the foll
--->
-
----
-
-# Wrap a Sector Model
-
-* Provides Methods
-  + Initialise
-  + Simulate
-  
-<img src="../fig/integration-workshop/smif-wrapper.png" alt="Smif Results" style="float:right;" width="400px" height="auto"/>
-
-* Provides DataHandle
-  + Get Data
-  + Get Parameters
-  + Get Results
-  + Set Results
+Today I will be demonstrating the user-interfaces that we have developed to help our users  
+setup and run a system-of-systems model.
 
 ---
 
@@ -79,9 +50,37 @@ It has been developed to facilitate the itegration process of a system-of-system
 
 Smif App
 
-<center>
-  <img class="gifplayer" src="../fig/integration-workshop/smif-app-preview.png" data-gif="../fig/integration-workshop/smif-app.gif" width="700px" height="auto"/>
-</center>
+<video width="800" height="400" controls>
+  <source src="../fig/integration-workshop/smif-app.webm" type="video/webm" >
+Your browser does not support the video tag.
+</video> 
+
+???
+
+Smif app is the user interface that helps to setup a system-of-systems model.
+
+In the following video, I will demonstrate the process of creating a basic energy-demand/supply system-of-systems model, that is driven by population scenarios.
+
+The video will be fairly quick, my goal is not to get into details, but I just want you to get an impression of the workflow that we have in place for system modellers.
+
+>> Smif app can be opened from the command-line interface, this command opens the smif welcome screen
+
+>> The project configuration that I have prepared contains two simulation models (energy-supply and energy-demand model) and a scenario set for population
+
+>> Lets have a look at the population scenario set. The population set contains a facet for a population, which can be sourced by three different population data set (low, medium and high)
+
+>> Lets have a look at the energy supply model
+>> The model contain a path to a wrapper file that implements the interface to this model
+>> There are inputs and outputs defined, each with a temporal and spatial resolution
+>> A similar setup can be found for the energy-demand model
+
+>> The next step now is to create a system-of-systems model
+>> A system-of-systems defines the dependencies between scenarios and simulation models
+>> In this example We are going to couple the population scenario, to the energy-demand model
+>> and the energy-demand model to the energy-supply model
+
+>> Now that we have a system-of-system model configuration, we can setup a Model Run configuration
+>> A model run brings together a system-of-systems model definition with timesteps and a choice of scenarios
 
 ---
 
@@ -93,6 +92,18 @@ Smif Run
 <center>
   <img class="gifplayer" src="../fig/integration-workshop/smif-run-preview.png" data-gif="../fig/integration-workshop/smif-run.gif" width="700px" height="auto"/>
 </center>
+
+???
+
+Smif run is a command line interface that helps to run a system-of-systems model
+
+>> **smif** Shows all of the available commands
+
+>> **smif list** Shows all of the available model Runs, like the one I just demonstrated
+
+>> **smif run** Starts a modelrun and shows when this is demonstrate
+
+>> **smif -v run** Prints debug information to the command line interface and gives you a more detailed report of what the modelrun system is doing
 
 ---
 
@@ -106,67 +117,60 @@ Smif Results
     <img src="../fig/integration-workshop/smif-results.png" alt="Smif Results" width="700px" height="auto"/>
 </center>  
 
+???
+
+After a succesful modelrun, modelrun results will be written to the filesystem. Nicely ordered by modelname, output, timestep and temporal/spatial resolution
+In the future this will be replaced by a datastore.
+
+---
+
+# Some last notes
+
+* Smif is a generic framework
+
+???
+
+Smif offers a generic concept for coupling models, it is not Mistral specific and can be used to couple any-type of models.
+
+--
+
+* Smif is open-source (MIT-license)
+* Current version v0.7.6
+* https://github.com/nismod/smif
+
+???
+
+Smif is open source, the current version is v0.7.6 is available on Github.
+
+--
+
+* Available on PyPi `pip install smif`
+* Sample project available!
+
+???
+
+Smif is available on the Python package index and there are sample projects to get started. 
+
 ---
 
 # Further steps
 
-* Wrappers for all Sector Models
+* Consult with Sector Modellers
 
-<style>  
-  th {
-      background-color: #006E79;
-      color: white;
-      text-align:left;
-  }
-</style>
+* Ideas
+  + Modelrun user-interface (now only CLI)
+  + Data visualisation
+  + Tools to support integration debugging
 
-<table style="width:100%">
-    <tr>
-      <th>Sector</th>
-      <th>Wrapper</th>
-      <th>Collaborations</th>
-      <th>System-of-Systems</th>
-    </tr>
-    <tr>
-      <td>Energy Supply</td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/><sup>Energy Demand-Supply</sup></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-    </tr>
-    <tr>
-      <td>Energy Demand</td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/><sup>Energy Demand-Supply</sup></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-    </tr>
-    <tr>
-      <td>Digital Comms</td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      </tr>
-    <tr>
-      <td>Transport</td>
-      <td><img src="../fig/checkbox-on.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-    </tr>
-    <tr>
-      <td>Solid Waste</td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-    </tr>
-    <tr>
-      <td>Water Supply</td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-      <td><img src="../fig/checkbox-off.png" width="30px" height="auto"/></td>
-    </tr>
-  </table> 
+???
 
-* Smif debugging tools
-* Result visualisation
+Further steps
+
+At this moment we are pretty happy with the features. And we are starting to integrate more models into Nismod2 using Smif.
+
+>> We will consult with Sector Modellers to find out how can best be support this group, as we will be doing in the discussion after this presentation
+
+>> Some of the ideas we have are:
 
 ---
 
@@ -178,38 +182,40 @@ Smif Results
 
 # Discussion
 
-## Schedule for integration & NISMOD2 releases
+## NISMOD2 releases
+
+???
+
+A challenge of developing a highly integrated model like Nismod2, 
+is that at some point the model will be used for research, while others members of the consortium still want to make changes to the model.
+To enable doing research and writing models at the same time, it is necessary to release the model regularly.
+
+>> One of the questions that we are currently asking is, how often should we release new version of Nismod?
+
+--
+
+- How frequently does the Nismod2 need to be released?
 
 --
 
 <center>
-  <img src="../fig/integration-workshop/discussion-deployment.png" alt="Discussion Deployment" width="600px" height="auto"/>
+  <img src="../fig/integration-workshop/discussion-deployment.png" alt="Discussion Deployment" width="400px" height="auto"/>
 </center>
 
 ???
 
-Schedule for integration
-
-In order to build NISMOD2, we will need integrate each of the sector models in the system-of-systems model.
-This is an iterative process which has already begun, with digital-comms, transport, energy-supply and demand models already in place.
-Our goal is to have a complete integrated system by ..... 2018.
-
-Discussion:
-- What is currently stopping you from integration?
-- Are there any specific requests for us to better support the integration process?
-
-
-NISMOD2 releases
-
-In the near future, NISMOD2 will be in used to run simulations, while some sector models are still being integrated, developed or improved.
-Our goal is to enable modellers to keep making changes to their models and NISMOD2, but at the same time maintaining a stable release of NISMOD2 for production.
-We believe that it is necessary to adopt a release schedule so that we can coordinate a smooth integration process.
-
 [show release cycle]
 
-Discussion:
-- Would this release schedule fit into your workflow?
-- Are there any suggestions or requirements to add to this release schedule? Frequency? Support?
+We have started to formalise the following release schedule which defines a process to release a version of Nismod2 every 4-weeks
+* In the development phase modellers may make changes to the model, this phase ends with a Pre-release of Nismod2
+* This pre-release version is then tested for a week and then a final release of Nismod2 is deployed
+* This process repeats every 4-weeks
+
+>> We would like to discuss here, how can we best tweak, clarify or support this process?
+
+--
+
+- How can we best tweak, clarify or support the release process?
 
 ---
 
