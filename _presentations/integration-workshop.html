@@ -15,53 +15,60 @@ Will Usher, Tom Russell &amp; Roald Schoenmakers
 
 Day 2: Morning (09:30 - 10:30)
 
-1. Progress so far (Will) - 10 mins
+1. Integration Progress So Far (Will) - 10 mins
 1. The Software Model Integration Framework (Roald) - 10 mins
 1. Plenary discussion - 40 mins
-
----
-
-# Overview and Challenges
-
-## Outline
-
-- NISMOD v2
-  - Status
-  - Initial Results
-- Sector Model Progress
-- Lessons Learned
-
-???
-
-Where we are and what to do next
+  - Reproducible data pre-process pipelines (Will)
+  - NISMOD 2 release schedule (Roald)
+  - Enabling the collaborative papers (Tom)
 
 ---
 
 # NISMOD v2.x
 
-![](../fig/integration-workshop/nismod2_diagram.png)
+<img src="../fig/integration-workshop/nismod2_diagram.png" />
 
+???
+
+- This is where we want to get to
+- We have a number of infrastructure simulation models
+- They are fed data from a datastore of some kind
+- They produce results
+- We defined dependencies between the models, and define conversion functions
+  (adapters) to allow the outputs from one model to feed into the inputs of another
+- We'll provide a number of decision modules that work across each of the infrastructure
+  sectors 
+- Our work here is supported by the simulation model integration framework (smif)
+- Smif provides the functionality to create, deploy, manage system of system models,
+  and run, analyze and archive model runs using these system-of-system models
+- All of this runs on hardware, yet to be defined
 
 ---
 
 # NISMOD v2.1
 
-![](../fig/integration-workshop/sos_model.png)
+<img src="../fig/integration-workshop/nismod 21 flow.png" height="500" />
 
----
+???
 
-# NISMOD v2.1
+We recently released NISMOD v2.1 containing integrated versions of energy demand and supply,
+digital comms, and transport.
 
-- No interdependencies (yet)
+Currently:
+- No interdependencies (yet) defined
 - Dependencies defined between energy demand and supply
   - Automatic conversion of (SI) units
   - Implicit/Explicit spatial and temporal conversion
+- Common scenarios feed into each of the models
 
 ---
 
 # Spatial and Temporal Conversions
 
-![Temporal Remapping]()
+<img src="../fig/integration-workshop/temporal_conversion.png" height="200" />
+<img src="../fig/integration-workshop/lads.png" height="300" />
+<img src="../fig/integration-workshop/energy_hubs.png" height="300" />
+
 
 ---
 
@@ -74,24 +81,6 @@ Where we are and what to do next
 # Sector Model Progress
 
 ![](../fig/integration-workshop/sector_model_status.png)
-
----
-
-# Model Data
-
-FTP server at Newcastle
-
-- configuration data 
-- model data
-
-
----
-
-# Releases
-
-- Hosted on FTP server at Newcastle, password protected
-- Hosted on Python Package Index (`HIRE`, `smif`, `CCAM`)
-
 
 ---
 
