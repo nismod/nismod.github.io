@@ -1,0 +1,220 @@
+---
+title: Spatial Data Tools
+layout: presentation
+---
+
+# Tools, tips and tricks
+
+---
+
+# Spatial
+
+Quickly create spatial data:
+http://geojson.io/
+
+Pick a point on a map:
+https://epsg.io/map
+
+---
+
+# Vis
+
+GIFs from stills:
+https://www.imagemagick.org
+
+On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
+`Users\<username>\bin\imagemagick`, replace `convert` with
+`%USERPROFILE%\bin\imagemagick\convert.exe`
+
+```bash
+# create discrete-image gif
+convert -delay 20 flow_map_*.png -loop 0 flow_map.gif
+
+# create smooth-blended gif
+convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
+```
+
+# Vis
+
+Videos from stills
+https://www.ffmpeg.org/
+
+```bash
+# convert pngs to mp4 (change framerate to change presentation speed)
+ffmpeg -framerate 10 -i figures/map_%d.png -pix_fmt yuv420p -c:v libx264 figures/map.mp4
+```
+
+---
+
+# All the data conversions
+ogr2ogr
+
+```
+ogr2ogr \
+    -f CSV \
+    -limit 10 \
+    -select LOCALID,LTIS_Desc,AvgPop2016,FLOORLEVEL,FLOORAREA \
+    ./nrd_res.csv \
+    ./nrd.gdb \
+    -lco GEOMETRY=AS_WKT \
+NRD2014_LTIS_FloorArea_RES
+```
+
+---
+
+# Excel
+
+Pivot table/chart
+
+Reading - just use pandas
+http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
+
+Updating, calculating - xlwings
+http://docs.xlwings.org
+
+---
+
+# Tidy data
+http://dx.doi.org/10.18637/jss.v059.i10
+
+Each variable in a column
+Each observation in a row
+Each type of observational unit in a table
+
+What can we do with tidy data?
+- Filter: subsetting or removing observations based on some condition.
+- Transform: adding or modifying variables.  These modifications can involve either asingle
+  variable (e.g., log-transformation), or multiple variables (e.g., computing density from
+  weight and volume).
+- Aggregate: collapsing multiple values into a single value (e.g., by summing or taking means).
+- Sort: changing the order of observations
+- Visualise: map from values of variables to aesthetic properties of the graph (e.g., position,
+  size, shape and colour).
+
+---
+
+# Version control
+
+https://chris.beams.io/posts/git-commit/
+
+
+1. Separate subject from body with a blank line
+1. Limit the subject line to 50 characters
+1. Capitalize the subject line
+1. Do not end the subject line with a period
+1. Use the imperative mood in the subject line
+1. Wrap the body at 72 characters
+1. Use the body to explain what and why vs. how
+
+```
+Fix typo in introduction to user guide
+```
+
+---
+
+# Version control
+
+```
+Summarize changes in around 50 characters or less
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+
+Further paragraphs come after blank lines.
+
+ - Bullet points can be handy, too
+ - Use a hyphen or an asterisk
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+```
+
+---
+
+# Workflow
+
+Explore; script; project
+
+R for Data Science
+https://r4ds.had.co.nz/index.html
+
+---
+
+# Workflow
+
+Best practices for scientific computing
+https://doi.org/10.1371/journal.pbio.1001745
+
+Cost of getting it wrong:
+"high-profile retractions, technical comments, and corrections because of errors in
+computational methods include papers in Science [7],[8], PNAS [9], the Journal of Molecular
+Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy [13], Journal of the American
+College of Cardiology [14], Hypertension [15], and The American Economic Review [16]."
+
+Good enough practices in scientific computing
+https://doi.org/10.1371/journal.pcbi.1005510
+
+---
+
+# Project layout
+
+```
+CITATION
+README
+LICENSE
+requirements.txt
+data
+ |-- birds_count_table.csv
+docs
+ |-- notebook.md
+ |-- manuscript.md
+ |-- changelog.txt
+results
+ |-- summarized_results.csv
+figures
+ |-- map.png
+src
+ |-- map_sightings.py
+ |-- sightings_analysis.py
+ |-- runall.py
+```
+
+```
+data_as_provided
+ |-- SOURCES.md
+ |-- ConservationAreas2017.zip
+```
+
+---
+
+# Re-use
+https://github.com/tomalrussell/snkit
+
+---
+
+# Databases
+
+If you know shapely, you almost know PostGIS:
+https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements
+
+PostgreSQL tutorial
+https://www.postgresql.org/docs/11/tutorial.html
+
+Intro to PostGIS
+https://postgis.net/workshops/postgis-intro/
+
+
+---
+
+# QGIS label rules
+
+```
+concat(
+  attribute($currentfeature, 'from_id'),
+  '<>',
+  attribute($currentfeature, 'to_id')
+)
+```
