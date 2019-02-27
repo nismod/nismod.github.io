@@ -1,110 +1,54 @@
 ---
-title: Spatial Data Tools
+title: Tools, tips and tricks
 layout: presentation
 ---
 
 # Tools, tips and tricks
 
----
-
-# Spatial
-
-Quickly create spatial data:
-http://geojson.io/
-
-Pick a point on a map:
-https://epsg.io/map
-
----
-
-# Vis
-
-GIFs from stills:
-https://www.imagemagick.org
-
-On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
-`Users\<username>\bin\imagemagick`, replace `convert` with
-`%USERPROFILE%\bin\imagemagick\convert.exe`
-
-```bash
-# create discrete-image gif
-convert -delay 20 flow_map_*.png -loop 0 flow_map.gif
-
-# create smooth-blended gif
-convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
-```
-
-# Vis
-
-Videos from stills
-https://www.ffmpeg.org/
-
-```bash
-# convert pngs to mp4 (change framerate to change presentation speed)
-ffmpeg -framerate 10 -i figures/map_%d.png -pix_fmt yuv420p -c:v libx264 figures/map.mp4
-```
+- Collection of examples and tools, notes, hints and best practices
 
 ---
 
 # All the data conversions
-ogr2ogr
 
+http://www.gdal.org/ogr2ogr.html
+
+Re-project a shapefile:
 ```
 ogr2ogr \
-    -f CSV \
-    -limit 10 \
-    -select LOCALID,LTIS_Desc,AvgPop2016,FLOORLEVEL,FLOORAREA \
-    ./nrd_res.csv \
-    ./nrd.gdb \
-    -lco GEOMETRY=AS_WKT \
-NRD2014_LTIS_FloorArea_RES
+    -s_srs "EPSG:4326" \            # source srs
+    -t_srs  "EPSG:27700" \          # target srs
+    buildings_osgb.shp              # output filename
+    buildings_latlon.shp            # input filename
+```
+
+Convert from GeoDatabase to CSV, filtering and selecting:
+```
+ogr2ogr \
+    -f CSV \                        # output a CSV
+    -limit 10 \                     # only 10 features
+    -select FloorArea,AvgPop2016 \  # only 2 attributes
+    ./nrd_res.csv \                 # output filename
+    ./nrd.gdb \                     # filename to read from (this one's a geodatabase)
+    -lco GEOMETRY=AS_WKT \          # output geometry as Well-Known-Text in the CSV
+NRD2014_LTIS_FloorArea_RES          # input layer name to read
 ```
 
 ---
 
-# Excel
+# Commit messages
 
-Pivot table/chart
-
-Reading - just use pandas
-http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
-
-Updating, calculating - xlwings
-http://docs.xlwings.org
-
----
-
-# Tidy data
-http://dx.doi.org/10.18637/jss.v059.i10
-
-Each variable in a column
-Each observation in a row
-Each type of observational unit in a table
-
-What can we do with tidy data?
-- Filter: subsetting or removing observations based on some condition.
-- Transform: adding or modifying variables.  These modifications can involve either asingle
-  variable (e.g., log-transformation), or multiple variables (e.g., computing density from
-  weight and volume).
-- Aggregate: collapsing multiple values into a single value (e.g., by summing or taking means).
-- Sort: changing the order of observations
-- Visualise: map from values of variables to aesthetic properties of the graph (e.g., position,
-  size, shape and colour).
-
----
-
-# Version control
+Good commit messages are helpful for future collaborators (including your future self).
 
 https://chris.beams.io/posts/git-commit/
 
-
-1. Separate subject from body with a blank line
-1. Limit the subject line to 50 characters
+Rules:
 1. Capitalize the subject line
-1. Do not end the subject line with a period
 1. Use the imperative mood in the subject line
-1. Wrap the body at 72 characters
+1. Separate subject from body with a blank line
 1. Use the body to explain what and why vs. how
+
+One-line commit messages can be great - clear and succinct:
 
 ```
 Fix typo in introduction to user guide
@@ -112,7 +56,9 @@ Fix typo in introduction to user guide
 
 ---
 
-# Version control
+# Commit messages - example
+
+Sometimes more context is very useful:
 
 ```
 Summarize changes in around 50 characters or less
@@ -134,28 +80,58 @@ See also: #456, #789
 
 ---
 
-# Workflow
+# Databases
 
-Explore; script; project
+If you know [`shapely`](https://shapely.readthedocs.io/en/stable/), you almost know PostGIS:
+https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements
 
-R for Data Science
-https://r4ds.had.co.nz/index.html
+The Postgres docs are very good.
+
+Start with a the PostgreSQL tutorial for a database intro/refresher:
+https://www.postgresql.org/docs/11/tutorial.html
+
+Work through 'Intro to PostGIS' with examples and exercises:
+https://postgis.net/workshops/postgis-intro/
 
 ---
 
-# Workflow
+# Excel
 
-Best practices for scientific computing
-https://doi.org/10.1371/journal.pbio.1001745
+Pivot table/chart
+https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c
 
-Cost of getting it wrong:
-"high-profile retractions, technical comments, and corrections because of errors in
-computational methods include papers in Science [7],[8], PNAS [9], the Journal of Molecular
-Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy [13], Journal of the American
-College of Cardiology [14], Hypertension [15], and The American Economic Review [16]."
+Reading - just use pandas
+http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
 
-Good enough practices in scientific computing
-https://doi.org/10.1371/journal.pcbi.1005510
+Updating, calculating - xlwings interacts with Excel, strong alternative to VBA scripting!
+http://docs.xlwings.org
+
+---
+
+# GIFs
+
+GIFs from stills
+https://www.imagemagick.org
+
+On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
+`Users\<username>\bin\imagemagick`, replace `convert` with
+`%USERPROFILE%\bin\imagemagick\convert.exe`
+
+```bash
+# create discrete-image gif
+convert -delay 20 flow_map_*.png -loop 0 flow_map.gif
+
+# create smooth-blended gif
+convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
+```
+
+---
+
+# Pandoc
+
+Convert text documents from one format to another - markdown/HTML/Word/LaTeX...
+
+https://pandoc.org/
 
 ---
 
@@ -190,31 +166,115 @@ data_as_provided
 
 ---
 
-# Re-use
-https://github.com/tomalrussell/snkit
-
----
-
-# Databases
-
-If you know shapely, you almost know PostGIS:
-https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements
-
-PostgreSQL tutorial
-https://www.postgresql.org/docs/11/tutorial.html
-
-Intro to PostGIS
-https://postgis.net/workshops/postgis-intro/
-
-
----
-
 # QGIS label rules
 
+Label features using an expression - this concatenates the values of the `from_id` and `to_id`
+attributes to label some network edges, producing labels like `1<>2`, `18<>27`...
+
 ```
-concat(
-  attribute($currentfeature, 'from_id'),
-  '<>',
-  attribute($currentfeature, 'to_id')
-)
+concat(from_id, '<>', to_id)
 ```
+
+---
+
+# Re-use code
+
+snkit - spatial networks toolkit, example of package that's work in progress, but collecting
+together bits of code that are both useful for data cleaning and a bit tricky to get right
+(handling enough of the edges cases, running reasonably quickly):
+
+https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb
+
+![Graph](/fig/tools-tips-tricks/snkit-out.png)
+![Zoom](/fig/tools-tips-tricks/snkit-zoom.png)
+
+
+---
+
+# Tidy data
+
+This is a simple but powerful idea about how to organise tabular data:
+- Each variable forms a column
+- Each observation forms a row
+- Each type of observational unit forms a table
+
+Readable paper which sets it out and runs through a few examples:
+http://dx.doi.org/10.18637/jss.v059.i10
+
+
+![Untidy](/fig/tools-tips-tricks/tidy_1.png)
+
+![Tidy](/fig/tools-tips-tricks/tidy_2.png)
+
+---
+
+# Tidy data uses
+
+What can we do with tidy data?
+- Filter: subsetting or removing observations based on some condition.
+- Transform: adding or modifying variables.  These modifications can involve either asingle
+  variable (e.g., log-transformation), or multiple variables (e.g., computing density from
+  weight and volume).
+- Aggregate: collapsing multiple values into a single value (e.g., by summing or taking means).
+- Sort: changing the order of observations
+- Visualise: map from values of variables to aesthetic properties of the graph (e.g., position,
+  size, shape and colour)
+
+---
+
+# Use the source
+
+Read open source code
+
+![Use the source](/fig/tools-tips-tricks/use-the-source.jpg)
+
+---
+
+# Videos
+
+Videos from stills
+https://www.ffmpeg.org/
+
+```bash
+# convert pngs to mp4 (change framerate to change presentation speed)
+ffmpeg -framerate 10 -i figures/map_%d.png -pix_fmt yuv420p -c:v libx264 figures/map.mp4
+```
+
+---
+
+# Workflow
+
+![Process](/fig/tools-tips-tricks/process.png)
+
+1. Explore data: fire up GIS, Excel, Jupyter notebook
+2. Write scripts: record/reproduce processing steps, scale up
+3. Make a project: more structure, collaboration
+
+R for Data Science has a nice intro to R and data work:
+https://r4ds.had.co.nz/index.html
+
+---
+
+# Workflow, take 2
+
+Best practices for scientific computing
+https://doi.org/10.1371/journal.pbio.1001745
+
+Cost of getting it wrong: take note of "high-profile retractions, technical comments, and
+corrections because of errors in computational methods include papers in Science [7],[8], PNAS
+[9], the Journal of Molecular Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy
+[13], Journal of the American College of Cardiology [14], Hypertension [15], and The American
+Economic Review [16]."
+
+Good enough practices in scientific computing
+https://doi.org/10.1371/journal.pcbi.1005510
+
+---
+
+# Zoom around
+
+Quickly create spatial data:
+http://geojson.io/
+
+Pick a point on a map:
+https://epsg.io/map
