@@ -1,17 +1,18 @@
 ---
 title: Tools, tips and tricks
-layout: presentation
+layout: default
 ---
 
-# Tools, tips and tricks
+# Tools, tips and tricks (A-Z)
 
-- Collection of examples and tools, notes, hints and best practices
+This is a grab-bag collection of examples and tools, notes, hints and pointers to good
+practices.
 
----
 
-# All the data conversions
+## All the data conversions
 
-http://www.gdal.org/ogr2ogr.html
+A spatial data format swiss army knife
+- http://www.gdal.org/ogr2ogr.html
 
 Re-project a shapefile:
 ```
@@ -34,9 +35,8 @@ ogr2ogr \
 NRD2014_LTIS_FloorArea_RES          # input layer name to read
 ```
 
----
 
-# Commit messages
+## Commit messages
 
 Good commit messages are helpful for future collaborators (including your future self).
 
@@ -45,8 +45,6 @@ https://chris.beams.io/posts/git-commit/
 Rules:
 1. Capitalize the subject line
 1. Use the imperative mood in the subject line
-1. Separate subject from body with a blank line
-1. Use the body to explain what and why vs. how
 
 One-line commit messages can be great - clear and succinct:
 
@@ -54,11 +52,9 @@ One-line commit messages can be great - clear and succinct:
 Fix typo in introduction to user guide
 ```
 
----
-
-# Commit messages - example
-
 Sometimes more context is very useful:
+1. Separate subject from body with a blank line
+1. Use the body to explain what and why vs. how
 
 ```
 Summarize changes in around 50 characters or less
@@ -78,14 +74,13 @@ Resolves: #123
 See also: #456, #789
 ```
 
----
 
-# Databases
+## Databases
 
 If you know [`shapely`](https://shapely.readthedocs.io/en/stable/), you almost know PostGIS:
 https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements
 
-The Postgres docs are very good.
+The Postgres docs are very good:
 
 Start with a the PostgreSQL tutorial for a database intro/refresher:
 https://www.postgresql.org/docs/11/tutorial.html
@@ -93,25 +88,26 @@ https://www.postgresql.org/docs/11/tutorial.html
 Work through 'Intro to PostGIS' with examples and exercises:
 https://postgis.net/workshops/postgis-intro/
 
----
 
-# Excel
+## Excel
 
 Pivot table/chart
-https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c
+
+- https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c
 
 Reading - just use pandas
-http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
+
+- http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
 
 Updating, calculating - xlwings interacts with Excel, strong alternative to VBA scripting!
-http://docs.xlwings.org
 
----
+- http://docs.xlwings.org
 
-# GIFs
+
+## GIFs
 
 GIFs from stills
-https://www.imagemagick.org
+- https://www.imagemagick.org
 
 On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
 `Users\<username>\bin\imagemagick`, replace `convert` with
@@ -125,17 +121,39 @@ convert -delay 20 flow_map_*.png -loop 0 flow_map.gif
 convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
 ```
 
----
 
-# Pandoc
+## More Workflow pointers
+
+Two overview papers from Wilson et al:
+
+Best practices for scientific computing
+- https://doi.org/10.1371/journal.pbio.1001745
+
+On a slightly sobering note, that paper has a reminder that ther's a cost to getting it wrong,
+with computational methods: take note of "high-profile retractions, technical comments, and
+corrections because of errors in computational methods include papers in Science [7],[8], PNAS
+[9], the Journal of Molecular Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy
+[13], Journal of the American College of Cardiology [14], Hypertension [15], and The American
+Economic Review [16]."
+
+Good enough practices in scientific computing
+- https://doi.org/10.1371/journal.pcbi.1005510
+
+
+## Pandoc
 
 Convert text documents from one format to another - markdown/HTML/Word/LaTeX...
 
-https://pandoc.org/
+- https://pandoc.org/
 
----
 
-# Project layout
+## Project layout
+
+Main ideas:
+- have a README that introduces the project
+- be explicit about licensing ([how to choose a license](https://choosealicense.com/) - MIT is
+  a good default, simple and permissive)
+- keep the source data
 
 ```
 CITATION
@@ -144,6 +162,9 @@ LICENSE
 requirements.txt
 data
  |-- birds_count_table.csv
+data_as_provided
+ |-- SOURCES.md
+ |-- ConservationAreas2017.zip
 docs
  |-- notebook.md
  |-- manuscript.md
@@ -158,40 +179,39 @@ src
  |-- runall.py
 ```
 
-```
-data_as_provided
- |-- SOURCES.md
- |-- ConservationAreas2017.zip
-```
 
----
+## QGIS label rules
 
-# QGIS label rules
-
-Label features using an expression - this concatenates the values of the `from_id` and `to_id`
-attributes to label some network edges, producing labels like `1<>2`, `18<>27`...
+Label features using an expression - the line below concatenates the values of the `from_id`
+and `to_id` attributes to label some network edges, producing labels like `1<>2`, `18<>27`...
 
 ```
 concat(from_id, '<>', to_id)
 ```
 
----
+## R
 
-# Re-use code
+R has been a bit of a de-facto language for stats - lots of good statistics packages, and
+`ggplot2` is great for charts.
 
-snkit - spatial networks toolkit, example of package that's work in progress, but collecting
-together bits of code that are both useful for data cleaning and a bit tricky to get right
-(handling enough of the edges cases, running reasonably quickly):
+R for Data Science has a nice intro to R and data work:
+- https://r4ds.had.co.nz/index.html
+
+
+## Re-use code
+
+snkit - a spatial networks toolkit, is an example of package that's work in progress. The aim
+is to collect together bits of code that are often useful for data cleaning and are also tricky
+to get right (handling enough of the edges cases, running reasonably quickly):
 
 https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb
 
 ![Graph](/fig/tools-tips-tricks/snkit-out.png)
+
 ![Zoom](/fig/tools-tips-tricks/snkit-zoom.png)
 
 
----
-
-# Tidy data
+## Tidy data
 
 This is a simple but powerful idea about how to organise tabular data:
 - Each variable forms a column
@@ -206,10 +226,6 @@ http://dx.doi.org/10.18637/jss.v059.i10
 
 ![Tidy](/fig/tools-tips-tricks/tidy_2.png)
 
----
-
-# Tidy data uses
-
 What can we do with tidy data?
 - Filter: subsetting or removing observations based on some condition.
 - Transform: adding or modifying variables.  These modifications can involve either asingle
@@ -220,61 +236,44 @@ What can we do with tidy data?
 - Visualise: map from values of variables to aesthetic properties of the graph (e.g., position,
   size, shape and colour)
 
----
 
-# Use the source
+## Use the source
 
 Read open source code
+- if you're stuck when using a library, reading the source code of the method you're using can
+  let you step down a layer
+- learn how projects and libraries are structured, patterns and design choices
 
 ![Use the source](/fig/tools-tips-tricks/use-the-source.jpg)
 
----
 
-# Videos
+## Videos
 
-Videos from stills
-https://www.ffmpeg.org/
+Create videos from stills:
+- https://www.ffmpeg.org/
 
 ```bash
 # convert pngs to mp4 (change framerate to change presentation speed)
 ffmpeg -framerate 10 -i figures/map_%d.png -pix_fmt yuv420p -c:v libx264 figures/map.mp4
 ```
 
----
 
-# Workflow
+## Workflow
+
+Think about how to switch tools and add project structure as things grow:
 
 ![Process](/fig/tools-tips-tricks/process.png)
+(image from R for data science, linked above)
 
 1. Explore data: fire up GIS, Excel, Jupyter notebook
 2. Write scripts: record/reproduce processing steps, scale up
 3. Make a project: more structure, collaboration
 
-R for Data Science has a nice intro to R and data work:
-https://r4ds.had.co.nz/index.html
 
----
-
-# Workflow, take 2
-
-Best practices for scientific computing
-https://doi.org/10.1371/journal.pbio.1001745
-
-Cost of getting it wrong: take note of "high-profile retractions, technical comments, and
-corrections because of errors in computational methods include papers in Science [7],[8], PNAS
-[9], the Journal of Molecular Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy
-[13], Journal of the American College of Cardiology [14], Hypertension [15], and The American
-Economic Review [16]."
-
-Good enough practices in scientific computing
-https://doi.org/10.1371/journal.pcbi.1005510
-
----
-
-# Zoom around
+## Zoom around
 
 Quickly create spatial data:
 http://geojson.io/
 
-Pick a point on a map:
+Pick a point on a map, in any* coordinate system:
 https://epsg.io/map
