@@ -11,7 +11,7 @@ practices.
 
 ## All the data conversions
 
-A spatial data format swiss army knife
+`ogr2ogr` is a spatial data format swiss army knife
 - [http://www.gdal.org/ogr2ogr.html](http://www.gdal.org/ogr2ogr.html)
 
 Re-project a shapefile:
@@ -35,12 +35,15 @@ ogr2ogr \
 NRD2014_LTIS_FloorArea_RES          # input layer name to read
 ```
 
+The docs are quite terse, but there are helpful blog posts and cheatsheets around.
+- [friendly introduction to the geo command line](https://medium.com/devseed/introduction-to-the-geo-command-line-3cc7a66a926e)
+
 
 ## Commit messages
 
 Good commit messages are helpful for future collaborators (including your future self).
 
-- [https://chris.beams.io/posts/git-commit/](https://chris.beams.io/posts/git-commit/)
+- taken from a [blog post by Chris Beams](https://chris.beams.io/posts/git-commit/)
 
 Rules:
 1. Capitalize the subject line
@@ -92,23 +95,19 @@ Work through 'Intro to PostGIS' with examples and exercises:
 ## Excel
 
 Pivot table/chart
-- [https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c](https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c)
+- [Microsoft docs](https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c)
 
 Reading - just use pandas
-- [http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader](http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader)
+- [pandas docs](http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader)
 
 Updating, calculating - xlwings interacts with Excel, strong alternative to VBA scripting!
-- [http://docs.xlwings.org](http://docs.xlwings.org)
+- [xlwings docs](http://docs.xlwings.org)
 
 
 ## GIFs
 
-GIFs from stills
-- [https://www.imagemagick.org](https://www.imagemagick.org)
-
-On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
-`Users\<username>\bin\imagemagick`, replace `convert` with
-`%USERPROFILE%\bin\imagemagick\convert.exe`
+Making GIFs from a series of still images
+- [imagemagick](https://www.imagemagick.org)
 
 ```bash
 # create discrete-image gif
@@ -118,6 +117,10 @@ convert -delay 20 flow_map_*.png -loop 0 flow_map.gif
 convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
 ```
 
+On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
+`Users\<username>\bin\imagemagick`, replace `convert` with
+`%USERPROFILE%\bin\imagemagick\convert.exe`
+
 
 ## More Workflow pointers
 
@@ -125,13 +128,6 @@ Two overview papers from Wilson et al:
 
 Best practices for scientific computing
 - [https://doi.org/10.1371/journal.pbio.1001745](https://doi.org/10.1371/journal.pbio.1001745)
-
-On a slightly sobering note, that paper has a reminder that ther's a cost to getting it wrong,
-with computational methods: take note of "high-profile retractions, technical comments, and
-corrections because of errors in computational methods include papers in Science [7],[8], PNAS
-[9], the Journal of Molecular Biology [10], Ecology Letters [11],[12], the Journal of Mammalogy
-[13], Journal of the American College of Cardiology [14], Hypertension [15], and The American
-Economic Review [16]."
 
 Good enough practices in scientific computing
 - [https://doi.org/10.1371/journal.pcbi.1005510](https://doi.org/10.1371/journal.pcbi.1005510)
@@ -141,15 +137,14 @@ Good enough practices in scientific computing
 
 Convert text documents from one format to another - markdown/HTML/Word/LaTeX...
 
-- [https://pandoc.org/](https://pandoc.org/)
+- [pandoc](https://pandoc.org/)
 
 
 ## Project layout
 
 Main ideas:
 - have a README that introduces the project
-- be explicit about licensing ([how to choose a license](https://choosealicense.com/) - MIT is
-  a good default, simple and permissive)
+- be explicit about licensing ([how to choose a license](https://choosealicense.com/)
 - keep the source data
 
 ```
@@ -176,6 +171,8 @@ src
  |-- runall.py
 ```
 
+(adapted from Wilson et al, linked above)
+
 
 ## QGIS label rules
 
@@ -192,7 +189,7 @@ R has been a bit of a de-facto language for stats - lots of good statistics pack
 `ggplot2` is great for charts.
 
 R for Data Science has a nice intro to R and data work:
-- [https://r4ds.had.co.nz/index.html](https://r4ds.had.co.nz/index.html)
+- [R for Data Science](https://r4ds.had.co.nz/index.html)
 
 
 ## Re-use code
@@ -201,10 +198,7 @@ snkit - a spatial networks toolkit, is an example of package that's work in prog
 is to collect together bits of code that are often useful for data cleaning and are also tricky
 to get right (handling enough of the edges cases, running reasonably quickly)
 
-Demo notebook:
-- [https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb](https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb)
-
-![Graph](/fig/tools-tips-tricks/snkit-out.png)
+- [snkit demo notebook](https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb)
 
 ![Zoom](/fig/tools-tips-tricks/snkit-zoom.png)
 
@@ -217,9 +211,13 @@ This is a simple but powerful idea about how to organise tabular data:
 - Each type of observational unit forms a table
 
 Readable paper which sets it out and runs through a few examples:
-- [http://dx.doi.org/10.18637/jss.v059.i10](http://dx.doi.org/10.18637/jss.v059.i10)
+- [Wickham (2014) Tidy Data](http://dx.doi.org/10.18637/jss.v059.i10)
+
+Untidy examples:
 
 ![Untidy](/fig/tools-tips-tricks/tidy_1.png)
+
+The same dataset, tidied:
 
 ![Tidy](/fig/tools-tips-tricks/tidy_2.png)
 
@@ -246,8 +244,8 @@ Read open source code
 
 ## Videos
 
-Create videos from stills:
-- [https://www.ffmpeg.org/](https://www.ffmpeg.org/)
+Create videos from stills (good for lots of frames, where GIFs would start to struggle):
+- [ffmpeg](https://www.ffmpeg.org/)
 
 ```bash
 # convert pngs to mp4 (change framerate to change presentation speed)
@@ -260,6 +258,7 @@ ffmpeg -framerate 10 -i figures/map_%d.png -pix_fmt yuv420p -c:v libx264 figures
 Think about how to switch tools and add project structure as things grow:
 
 ![Process](/fig/tools-tips-tricks/process.png)
+
 (image from R for data science, linked above)
 
 1. Explore data: fire up GIS, Excel, Jupyter notebook
@@ -269,8 +268,23 @@ Think about how to switch tools and add project structure as things grow:
 
 ## Zoom around
 
-Quickly create spatial data:
+Handy website to quickly create spatial data:
 - [http://geojson.io/](http://geojson.io/)
 
 Pick a point on a map, in any* coordinate system:
 - [https://epsg.io/map](https://epsg.io/map)
+
+Simplify some spatial data:
+- [https://mapshaper.org/](https://mapshaper.org/)
+
+Make a GIF:
+- [https://ezgif.com/maker](https://ezgif.com/maker)
+
+Compress images:
+- [https://tinypng.com/](https://tinypng.com/)
+
+Draw flowcharts:
+- [https://www.draw.io/](https://www.draw.io/)
+
+Awesome lists:
+- [list of lists](https://github.com/sindresorhus/awesome)
