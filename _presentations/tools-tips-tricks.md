@@ -12,7 +12,7 @@ practices.
 ## All the data conversions
 
 A spatial data format swiss army knife
-- http://www.gdal.org/ogr2ogr.html
+- [http://www.gdal.org/ogr2ogr.html](http://www.gdal.org/ogr2ogr.html)
 
 Re-project a shapefile:
 ```
@@ -40,7 +40,7 @@ NRD2014_LTIS_FloorArea_RES          # input layer name to read
 
 Good commit messages are helpful for future collaborators (including your future self).
 
-https://chris.beams.io/posts/git-commit/
+- [https://chris.beams.io/posts/git-commit/](https://chris.beams.io/posts/git-commit/)
 
 Rules:
 1. Capitalize the subject line
@@ -78,36 +78,33 @@ See also: #456, #789
 ## Databases
 
 If you know [`shapely`](https://shapely.readthedocs.io/en/stable/), you almost know PostGIS:
-https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements
+- [https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements](https://postgis.net/docs/reference.html#Spatial_Relationships_Measurements)
 
 The Postgres docs are very good:
 
 Start with a the PostgreSQL tutorial for a database intro/refresher:
-https://www.postgresql.org/docs/11/tutorial.html
+- [https://www.postgresql.org/docs/11/tutorial.html](https://www.postgresql.org/docs/11/tutorial.html)
 
 Work through 'Intro to PostGIS' with examples and exercises:
-https://postgis.net/workshops/postgis-intro/
+- [https://postgis.net/workshops/postgis-intro/](https://postgis.net/workshops/postgis-intro/)
 
 
 ## Excel
 
 Pivot table/chart
-
-- https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c
+- [https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c](https://support.office.com/en-us/article/create-a-pivotchart-c1b1e057-6990-4c38-b52b-8255538e7b1c)
 
 Reading - just use pandas
-
-- http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader
+- [http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader](http://pandas.pydata.org/pandas-docs/stable/user_guide/io.html?highlight=excel#io-excel-reader)
 
 Updating, calculating - xlwings interacts with Excel, strong alternative to VBA scripting!
-
-- http://docs.xlwings.org
+- [http://docs.xlwings.org](http://docs.xlwings.org)
 
 
 ## GIFs
 
 GIFs from stills
-- https://www.imagemagick.org
+- [https://www.imagemagick.org](https://www.imagemagick.org)
 
 On windows, the 'portable' version doesn't need admin rights: e.g. if the zip is extracted to
 `Users\<username>\bin\imagemagick`, replace `convert` with
@@ -127,7 +124,7 @@ convert -delay 5 flow_map_*.png -loop 0 -morph 5 flow_map_smooth.gif
 Two overview papers from Wilson et al:
 
 Best practices for scientific computing
-- https://doi.org/10.1371/journal.pbio.1001745
+- [https://doi.org/10.1371/journal.pbio.1001745](https://doi.org/10.1371/journal.pbio.1001745)
 
 On a slightly sobering note, that paper has a reminder that ther's a cost to getting it wrong,
 with computational methods: take note of "high-profile retractions, technical comments, and
@@ -137,14 +134,14 @@ corrections because of errors in computational methods include papers in Science
 Economic Review [16]."
 
 Good enough practices in scientific computing
-- https://doi.org/10.1371/journal.pcbi.1005510
+- [https://doi.org/10.1371/journal.pcbi.1005510](https://doi.org/10.1371/journal.pcbi.1005510)
 
 
 ## Pandoc
 
 Convert text documents from one format to another - markdown/HTML/Word/LaTeX...
 
-- https://pandoc.org/
+- [https://pandoc.org/](https://pandoc.org/)
 
 
 ## Project layout
@@ -195,16 +192,17 @@ R has been a bit of a de-facto language for stats - lots of good statistics pack
 `ggplot2` is great for charts.
 
 R for Data Science has a nice intro to R and data work:
-- https://r4ds.had.co.nz/index.html
+- [https://r4ds.had.co.nz/index.html](https://r4ds.had.co.nz/index.html)
 
 
 ## Re-use code
 
 snkit - a spatial networks toolkit, is an example of package that's work in progress. The aim
 is to collect together bits of code that are often useful for data cleaning and are also tricky
-to get right (handling enough of the edges cases, running reasonably quickly):
+to get right (handling enough of the edges cases, running reasonably quickly)
 
-https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb
+Demo notebook:
+- [https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb](https://github.com/tomalrussell/snkit/blob/master/notebooks/snkit-demo.ipynb)
 
 ![Graph](/fig/tools-tips-tricks/snkit-out.png)
 
@@ -219,8 +217,7 @@ This is a simple but powerful idea about how to organise tabular data:
 - Each type of observational unit forms a table
 
 Readable paper which sets it out and runs through a few examples:
-http://dx.doi.org/10.18637/jss.v059.i10
-
+- [http://dx.doi.org/10.18637/jss.v059.i10](http://dx.doi.org/10.18637/jss.v059.i10)
 
 ![Untidy](/fig/tools-tips-tricks/tidy_1.png)
 
@@ -250,7 +247,7 @@ Read open source code
 ## Videos
 
 Create videos from stills:
-- https://www.ffmpeg.org/
+- [https://www.ffmpeg.org/](https://www.ffmpeg.org/)
 
 ```bash
 # convert pngs to mp4 (change framerate to change presentation speed)
@@ -273,7 +270,7 @@ Think about how to switch tools and add project structure as things grow:
 ## Zoom around
 
 Quickly create spatial data:
-http://geojson.io/
+- [http://geojson.io/](http://geojson.io/)
 
 Pick a point on a map, in any* coordinate system:
-https://epsg.io/map
+- [https://epsg.io/map](https://epsg.io/map)
