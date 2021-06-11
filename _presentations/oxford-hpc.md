@@ -95,7 +95,7 @@ node on the cluster to log in to (linux1 or linux2 .... linux32) and sometimes
 that node is overloaded so login fails. Try again when that happens, or pick a
 specific node:
 
-    ssh abcd1234@*linux3*.ouce.ox.ac.uk
+    ssh abcd1234@linux3.ouce.ox.ac.uk
 
 
 #### Moving files
