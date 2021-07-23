@@ -10,8 +10,6 @@ layout: presentation
 
 Tom Russell & Will Usher
 
-ITRC-MISTRAL Induction Workshop - 7th October 2016
-
 Derived from work that is Copyright © [Software Carpentry](http://software-carpentry.org/)
 under the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/)
 
@@ -175,9 +173,9 @@ the same files concurrently.
 
 ---
 
-## Exercise: System of Systems National Infrastructure Model
+## Exercise: System of Systems National Infrastructure Modelling
 
-*   Imagine you're part of a consortium of several universities, as part of a
+*   Imagine you're part of a 
     research project to model national infrastructure systems over the next
     50-100 years. How would you approach developing a suite of models in
     parallel?
@@ -253,18 +251,12 @@ If you are concerned about privacy, please review [GitHub's instructions for kee
 
 ## Text editor for git commit messages
 
-Pick a text editor to use (we'll use `notepad` for the rest of this presentation):
+Pick a text editor to use (we'll use `nano` for the rest of this presentation):
 
 | Editor | Configuration command                          |
 |:-------------------|:-------------------------------------------------|
-| Notepad            | `git config --global core.editor notepad`
 | nano               | `git config --global core.editor "nano -w"`    |
 | vim                | `git config --global core.editor "vim"`        |
-| Atom               | `git config --global core.editor "atom --wait"`|
-| Sublime Text (Mac) | `git config --global core.editor "subl -n -w"` |
-| Sublime Text (Win, 64-bit) | `git config --global core.editor "'C:\Program files\sublime text 3\sublime_text.exe' -w"` |
-| Visual Studio Code (Win)   | `git config --global core.editor "'C:\Program Files (x86)\Microsoft VS Code\bin\code' --wait"` |
-| Notepad++ (Win, 64-bit)    | `git config --global core.editor "'C:\Program files\Notepad++\notepad++.exe' -multiInst -notabbar -nosession -noPlugin"`|
 
 
 ???
@@ -524,7 +516,7 @@ Let's create a file called `mars.txt` that contains some notes
 about the Red Planet's suitability as a base.
 
 ```bash
-notepad mars.txt
+nano mars.txt
 ```
 
 Type the text below into the `mars.txt` file:
@@ -535,7 +527,7 @@ Cold and dry, but everything is my favorite colour
 
 ???
 
-(We'll use `notepad` to edit the file;
+(We'll use `nano` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the `core.editor` you set globally earlier.)
 
@@ -684,7 +676,7 @@ This permanent copy is called a [commit]({{ page.root }}/reference/#commit)
 We use the `-m` flag (for "message")
 to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
 If we just run `git commit` without the `-m` option,
-Git will launch `notepad` (or whatever other editor we configured as `core.editor`)
+Git will launch `nano` (or whatever other editor we configured as `core.editor`)
 so that we can write a longer message.
 
 [Good commit messages][commit-messages] start with a brief (<50 characters) summary of
@@ -737,7 +729,7 @@ so that our filesystem doesn't become cluttered
 Now suppose Dracula adds more information to the file.
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -772,7 +764,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ???
 
-(Again, we'll edit with `notepad` and then `cat` the file to show its contents;
+(Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
 The last line is the key phrase:
@@ -896,7 +888,7 @@ Let's run through the process again, from (1) making a change in the working
 directory to (2) the staging area, to (3) commiting.
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -1221,7 +1213,7 @@ and commit those changes.
 ## Solution
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -1230,7 +1222,7 @@ Maybe I should start with a base on Venus.
 ```
 
 ```bash
-notepad venus.txt
+nano venus.txt
 cat venus.txt
 ```
 
@@ -1310,7 +1302,7 @@ Keypoints:
 Let's make another small change:
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -1480,7 +1472,7 @@ so Git lets us use just the first few characters.
 Let's suppose we accidentally overwrite our file:
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -1718,9 +1710,9 @@ What is the output of `cat venus.txt` at the end of this set of commands?
 
 ```bash
 cd planets
-notepad venus.txt # add text: Venus is beautiful and full of love
+nano venus.txt # add text: Venus is beautiful and full of love
 git add venus.txt
-notepad venus.txt # add text: Venus is too hot to be suitable as a base
+nano venus.txt # add text: Venus is too hot to be suitable as a base
 git commit -m "comments on Venus as an unsuitable base"
 git checkout HEAD venus.txt
 cat venus.txt # print the contents of venus.txt to the screen
@@ -1817,7 +1809,7 @@ so let's tell Git to ignore them.
 We do this by creating a file in the root directory of our project called `.gitignore`:
 
 ```bash
-notepad .gitignore
+nano .gitignore
 cat .gitignore
 ```
 
@@ -2391,7 +2383,7 @@ exactly the same way as we've been doing before:
 
 ```bash
 cd ~/Desktop/vlad-planets
-notepad pluto.txt
+nano pluto.txt
 cat pluto.txt
 ```
 
@@ -2572,7 +2564,7 @@ different changes to each copy.
 Let's add a line to one partner's copy only:
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
@@ -2624,7 +2616,7 @@ make a different change to their copy
 *without* updating from GitHub:
 
 ```bash
-notepad mars.txt
+nano mars.txt
 cat mars.txt
 ```
 
