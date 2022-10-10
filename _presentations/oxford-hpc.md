@@ -52,7 +52,7 @@ project group to access a shared directory.
 You need to be connected to the VPN before you can log in to the server
 from outside of the department.
 
-VPN help - https://help.it.ox.ac.uk/network/vpn/index
+[VPN help](https://help.it.ox.ac.uk/network/vpn/index)
 
 #### SSH - Secure Shell
 
@@ -70,7 +70,7 @@ On Linux or Mac, open a Terminal:
     $ ls
     > some_file.txt data.csv image.png ...
 
-Tutorial - http://www.linuxcommand.org/
+[Tutorial](http://www.linuxcommand.org/)
 
 On Windows, the same commands would work in the
 [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
@@ -122,14 +122,13 @@ already exist:
 
     rsync -azP ./data abcd1234@linux.ouce.ox.ac.uk:/ouce/staff/home/abcd1234/project/
 
-Tutorial - https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps
+[Tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)
 
 
-__`WinSCP`__ - File transfer for Windows https://winscp.net/eng/index.php
+__`Filezilla`__ - File transfer
 
-Graphical program for file transfer - set up connection, browse through
-folders. [Filezilla](https://filezilla-project.org/) is a good cross-platform
-alternative.
+[Filezilla](https://filezilla-project.org/) is a graphical program for file transfer - set up
+connection, browse through folders.
 
 
 #### Long jobs
@@ -149,21 +148,37 @@ alternative.
 
 #### Many jobs
 
-`parallel` - run in parallel https://www.gnu.org/software/parallel/
+[GNU `parallel`](https://www.gnu.org/software/parallel/) lets you run the same command lots of
+times in parallel, without necessarily making changes to the script or command-line tool you
+want to run.
+
+`parallel` has a [book-style tutorial and documentation](https://zenodo.org/record/1146014) and
+[videos](http://www.youtube.com/playlist?list=PL284C9FF2488BC6D1) which give a good
+introduction.
+
+A few quick examples follow:
 
 Count the lines in all the CSV files anywhere in the current directory:
 
     find . -name '*.csv' | parallel wc -l
 
-Use an argument list from a file (each line gets passed to the command
-separately, replacing `{}`):
+Use an argument list from a file (each line from `list.txt` gets passed to the command
+separately, replacing the `{}`):
 
     cat list.txt | parallel echo {}
 
-Use an argument list from a CSV (each row gets passed to the command
-separately, and each column value is available as a numbered argument):
+Use an argument list from a CSV (each row gets passed to the command separately, and each
+column value is available as a numbered argument).
 
-    parallel -a args.csv --colsep ',' python run.py --alpha {2} --beta {1}
+For example, `arg.csv` might contain:
+
+    a,b
+    1,2
+    3,4
+
+Then `parallel` can read the file and pick up column names from the header:
+
+    parallel --header : -a args.csv --colsep ',' echo "a={a} b={b}"
 
 One important option for `parallel` is `-j` - to limit the number of jobs that
 run in parallel. E.g.
@@ -190,32 +205,22 @@ for i in {1..32}; do printf "\nlinux$i\n"; ssh linux$i.ouce.ox.ac.uk free -g; do
 
 ### Oxford Advanced Research Computing (ARC) clusters
 
-The University of Oxford has a couple of clusters managed centrally by the ARC
-service.
+The University of Oxford has some high-performance computing which is managed centrally by the
+ARC service, with two main clusters.
 
-Introduction, help, how-to:
-
-- https://help.it.ox.ac.uk/arc/index
-
-ARCUS-HTC is optimised for single-core jobs and running serial applications
+`htc` is optimised for single-core jobs and running serial applications
 many times - like a parameter sweep, sensitivity analysis or big scenario
-analysis. In terms of resources, it has:
+analysis.
 
-- 1728 (108*16) 2.0GHz Xeon SandyBridge/Ivybridge cores
-- 64GiB (80 nodes), 128GiB (4 nodes) RAM
-- 20TB scratch disk
-- GPU resources
-
-ARCUS-B is optimised for large parallel jobs spanning multiple nodes - like a
+`arc` is optimised for large parallel jobs spanning multiple nodes - like a
 climate model run or other gridded, massively parallel computation. In terms of
-resources, it has:
+resources.
 
-- 5792 (362*16) Intel E5-2640v3 (Haswell) cores
-- 64GiB (246 nodes), 128GiB (92 nodes), 256GiB (9 nodes) of RAM
-- Low latency interconnect
-- Minimum job size 16 cores (1 node)
+More information:
+- [ARC homepage](https://www.arc.ox.ac.uk/home)
+- [user registration](https://www.arc.ox.ac.uk/arc-user-registration-page)
+- [help and documentation](https://arc-user-guide.readthedocs.io/en/latest/index.html)
 
-Contact ARC support to set up an account and request credits if necessary.
 
 
 #### Scheduler
@@ -225,9 +230,7 @@ or through `screen`, you write a short configuration script to tell the cluster
 what you want to run, and submit it to the job scheduler. Your jobs sit in a
 queue until there's space to run them.
 
-- https://help.it.ox.ac.uk/arc/job-scheduling
-
-Here's a simple example, plenty more details in the link above.
+Here's a simple example, plenty more details in the documentation linked above.
 
 Save the following in a script `test_job.sh`:
 
