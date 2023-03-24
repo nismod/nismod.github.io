@@ -268,8 +268,9 @@ Think about how to switch tools and add project structure as things grow:
 
 ## Zoom around
 
-Handy website to quickly create spatial data:
+Handy websites to quickly create or edit spatial data:
 - [http://geojson.io/](http://geojson.io/)
+- [https://app.placemark.io/play](https://app.placemark.io/play)
 
 Pick a point on a map, in any* coordinate system:
 - [https://epsg.io/map](https://epsg.io/map)
@@ -282,6 +283,7 @@ Make a GIF:
 
 Compress images:
 - [https://tinypng.com/](https://tinypng.com/)
+- [https://www.websiteplanet.com/webtools/imagecompressor/](https://www.websiteplanet.com/webtools/imagecompressor/)
 
 Draw flowcharts:
 - [https://www.draw.io/](https://www.draw.io/)
